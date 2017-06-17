@@ -1,0 +1,26 @@
+{
+  "presets": [
+    "flow",
+    "react",
+  ],
+
+  "plugins": [
+    ["transform-strict-mode", { "strict": true }],
+    ["transform-class-properties", {}],
+  ],
+
+  "env": {
+    "test": {
+      "presets": ["flow"],
+      "plugins": ["istanbul"]
+    },
+    "node": {
+      "plugins": [
+        ["transform-strict-mode", { "strict": true }],
+        ["transform-class-properties", {}],
+        ["babel-plugin-transform-require-ignore",{"extensions": [".css"]}],
+        ["babel-plugin-react-css-modules", {"removeImport": true}]
+      ],
+    },
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "lines": 95,
+  "statements": 95,
+  "functions": 95,
+  "branches": 95,
+  "include": [
+    "app/**"
+  ],
+  "reporter": [
+    "lcov",
+    "text"
+  ],
+  "require": [
+  ],
+  "extension": [
+    ".js",
+    ".jsx"
+  ],
+  "cache": true,
+  "all": true,
+  "report-dir": "reports/coverage"
+}

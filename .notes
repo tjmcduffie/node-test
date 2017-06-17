@@ -1,0 +1,33 @@
+packages
+- node-dev might be a replacement for nodemon
+- Bunyan or Winston might be companion loggers to Morgan
+- BrowserSync for commanding multiple browsers at once
+- helmet for security
+- configure cors properly
+- consider nsp and/or requireSafe to identify dependency security holes
+
+Security checklists
+- https://blog.risingstack.com/node-js-security-checklist/
+- https://strongloop.com/strongblog/best-practices-for-express-in-production-part-one-security/
+- https://www.owasp.org/index.php/Top_10_2013-Top_10
+- https://www.owasp.org/index.php/Category:OWASP_Top_Ten_Project
+
+hosting options
+- https://www.heroku.com/pricing
+- https://www.openshift.com/pricing/index.html
+- https://aws.amazon.com/elasticbeanstalk/pricing/
+- https://cloud.google.com/free/
+- https://www.godaddy.com/pro/one-click-installation/node-js
+- https://cloudno.de/pricing
+
+other considerations
+- [react starter kit](https://github.com/kriasoft/react-starter-kit)
+-- graphQL
+-- Sequelize MySQL ORM
+-- critical CSS example
+-- auth example
+-- browser sync example
+- [express guides](https://expressjs.com/en/guide/error-handling.html)
+-- error handling
+- [webpack plugins](https://webpack.js.org/plugins/loader-options-plugin/)
+- [webpack sass loader](https://github.com/webpack-contrib/sass-loader)
