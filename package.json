@@ -5,7 +5,7 @@
   "main": "app/index.js",
   "scripts": {
     "start": "export NODE_ENV='production' PORT=8080 && npm run start:prod",
-    "start:dev": "export NODE_ENV='development' PORT=3000 && npm run build:prep:dist && parallelshell 'npm run build:client:dev:auto' 'npm run serve:dev'",
+    "start:dev": "export NODE_ENV='development' PORT=3000 && npm run build:prep:dist && npm run build:client:dev:static && npm run serve:dev",
     "start:int": "export NODE_ENV='integration' PORT=8080 && npm run start:prod",
     "start:prod": "npm run build:prep:dist && parallelshell 'npm run build:server' 'npm run build:client' && npm run serve",
     "serve": "forever -f -a -o dist/log/forever.log -e dist/log/error.log dist/app/index.js",
@@ -13,6 +13,8 @@
     "build:client": "npm run build:img && npm run build:css && webpack",
     "build:client:dev": "export NODE_ENV='development' && npm run build:img && npm run build:css && webpack -d",
     "build:client:dev:auto": "export NODE_ENV='development' && npm run build:img && npm run build:css && webpack -d --watch",
+    "build:client:dev:js": "export NODE_ENV='development' && webpack -d",
+    "build:client:dev:static": "npm run build:img && npm run build:css",
     "build:css": "mkdir -p dist/static && cp -R app/static_src/css dist/static",
     "build:img": "mkdir -p dist/static && cp -R app/static_src/img dist/static",
     "build:prep:dist": "rm -rf ./dist/* && mkdir dist/log && npm run build:prep:symlink",

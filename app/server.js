@@ -87,11 +87,13 @@ if (ENV === EnvEnum.DEV) {
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackConfig = require('~/webpack.config');
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
-    // compress: true,
-    // lazy: true,
-    publicPath: '/js/',
+    noInfo: true,
+    compress: true,
+    lazy: true,
+    publicPath: '/',
   }));
-  app.use(express.static(__dirname + '/../dist/static'));
+  app.use('/css', express.static(__dirname + '/../dist/static/css'));
+  app.use('/img', express.static(__dirname + '/../dist/static/img'));
 } else {
   app.use(express.static(__dirname + '/../static'));
 }
