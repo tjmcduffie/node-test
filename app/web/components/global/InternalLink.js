@@ -6,14 +6,14 @@
 
 "use strict";
 
+import type {BrowserHistory} from '~/app/lib/util/browserHistory';
+import type {InternalRouteType} from '~/app/web/generated/NavRoutes';
+import type {Element as ReactElement} from 'react';
+
 const BaseError = require('~/app/lib/BaseError');
 const browserHistory = require('~/app/lib/util/browserHistory')();
 const React = require('react');
 const URIParser = require('~/app/lib/util/URIParser');
-
-import type {BrowserHistory} from '~/app/lib/util/browserHistory';
-import type {InternalRouteType} from '~/app/web/generated/NavRoutes';
-import type {Element as ReactElement} from 'react';
 
 class InternalLinkError extends BaseError {}
 

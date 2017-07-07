@@ -1,17 +1,17 @@
 /*global */
 /**
- * 
+ *
  * @flow
  */
 
 "use strict";
 
+import type {$Request, $Response} from 'express';
+import type {Element as ReactElement} from 'react';
+
 const BaseHtmlRoute = require('~/app/web/routes/BaseHtmlRoute');
 const HomePage = require('~/app/web/components/pages/HomePage');
 const React = require('react');
-
-import type {$Request, $Response} from 'express';
-import type {Element as ReactElement} from 'react';
 
 const homeRoutePath: string = '/';
 
@@ -20,7 +20,7 @@ class HomeRoute extends BaseHtmlRoute {
     return homeRoutePath;
   }
 
-  constructor(req: $Request, res: $Response) {
+  constructor(req: $Request, res: $Response): void {
     super(req, res);
     this.setPageTitle('Home');
   }
