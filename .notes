@@ -31,3 +31,4 @@ other considerations
 -- error handling
 - [webpack plugins](https://webpack.js.org/plugins/loader-options-plugin/)
 - [webpack sass loader](https://github.com/webpack-contrib/sass-loader)
+- use css modules for loading/managing CSS

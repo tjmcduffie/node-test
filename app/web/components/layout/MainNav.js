@@ -6,28 +6,29 @@
 
 "use strict";
 
+const IdEnum = require('~/app/lib/IdEnum');
 const InternalLink = require('~/app/web/components/global/InternalLink');
 const NavRoutes = require('~/app/web/generated/NavRoutes');
 const React = require('react');
 
+const styles = require('~/app/static_src/css/MainNav.css');
+
 import type {Element as ReactElement} from 'react';
 
 class MainNav extends React.PureComponent {
-  props: {
-    className: string,
-    id: string,
-  };
-
   render() {
     return (
       <nav
-        className={this.props.className}
-        id={this.props.id}
+        className={styles.nav}
+        id={IdEnum.MAIN_NAV}
       >
-        <ul>
+        <ul className={styles.list}>
           {NavRoutes.map(route => {
             return (
-              <li key={route.key}>
+              <li
+                className={styles.item}
+                key={route.key}
+              >
                 <InternalLink href={route.path} route={route}>
                   {route.name}
                 </InternalLink>

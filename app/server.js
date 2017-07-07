@@ -82,18 +82,25 @@ if (ENV === EnvEnum.DEV) {
   console.log('adding DEV only meta assets');
   app.use('/meta/coverage', express.static(__dirname + '/../reports/coverage/lcov-report'));
 
+  console.log('enabling css-modules');
+  const hook = require('css-modules-require-hook');
+  hook({
+    generateScopedName: '[name]--[local]--[hash:base64:5]',
+  });
+
   console.log('serving js from Webpack middleware');
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackConfig = require('~/webpack.config');
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
-    noInfo: true,
+    noInfo: false,
     compress: true,
-    lazy: true,
+    // lazy: true,
     publicPath: '/',
   }));
-  app.use('/css', express.static(__dirname + '/../dist/static/css'));
-  app.use('/img', express.static(__dirname + '/../dist/static/img'));
+
+  // app.use('/css', express.static(__dirname + '/../build/static/css'));
+  app.use('/img', express.static(__dirname + '/../build/static/img'));
 } else {
   app.use(express.static(__dirname + '/../static'));
 }

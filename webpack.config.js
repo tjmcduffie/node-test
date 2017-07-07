@@ -9,38 +9,49 @@ const webpack = require('webpack');
 console.log('webpack process.env.NODE_ENV', process.env.NODE_ENV);
 module.exports = {
   entry: {
-    // all:  path.join(__dirname, 'app', 'static_src', 'js', 'all.js'),
     header: path.join(__dirname, 'app', 'static_src', 'js', 'AppHeader.js'),
     content: path.join(__dirname, 'app', 'static_src', 'js', 'AppContent.js'),
-    // test: path.join(__dirname, 'app', 'static_src', 'js', 'test.js'),
   },
   output: {
-    path: path.join(__dirname, 'dist', 'static'),
+    path: path.join(__dirname, 'build', 'static'),
     filename: 'js/[name].bundle.js',
   },
   module: {
-    rules: [{
-      test: /\.js$/,
-      exclude: /(node_modules)/,
-      use: {
-        loader: 'babel-loader',
-        options: {
-          babelrc: false,
-          cacheDirectory: true,
-          presets: [
-            'react',
-            'flow',
-          ],
-          plugins: [
-            ["transform-strict-mode", { "strict": true }],
-            ["transform-class-properties", {}],
-          ]
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /(node_modules)/,
+        use: {
+          loader: 'babel-loader',
+          options: {
+            babelrc: false,
+            cacheDirectory: true,
+            presets: [
+              'react',
+              'flow',
+            ],
+            plugins: [
+              ["transform-strict-mode", { "strict": true }],
+              ["transform-class-properties", {}],
+            ]
+          },
         },
       },
-    // }, {
-    //   test: /\.css$/,
-    //   loader: ExtractTextPlugin.extract({use: 'css-loader'}),
-    }],
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          use: [
+            {
+              loader: "css-loader",
+              options: {
+                modules: true,
+                localIdentName: '[name]--[local]--[hash:base64:5]'
+              },
+            },
+          ],
+        }),
+      }
+    ],
   },
   plugins: [
     new webpack.DefinePlugin({
@@ -59,9 +70,9 @@ module.exports = {
       filename: 'js/inline.bundle.js',
       minChunks: 2,
     }),
-    // new ExtractTextPlugin({
-    //   filename: 'css/[name].bundle.css',
-    // }),
+    new ExtractTextPlugin({
+      filename: 'css/[name].bundle.css',
+    }),
     // new webpack.optimize.AggressiveSplittingPlugin({
     //     minSize: 5000,
     //     maxSize: 10000

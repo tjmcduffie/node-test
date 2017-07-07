@@ -14,5 +14,6 @@ logs
 
 npm-debug.log
 node_modules
+build/*
 
 .DS_Store

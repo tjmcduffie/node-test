@@ -10,7 +10,7 @@ const BaseError = require('~/app/lib/BaseError');
 
 class RunWhenReadyError extends BaseError {}
 
-module.exports = function runWhenReady(callback) {
+module.exports = function runWhenReady(callback?: () => void) {
   if (!callback) {
     throw new RunWhenReadyError('callback not provided!');
   }
