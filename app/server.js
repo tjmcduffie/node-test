@@ -9,6 +9,7 @@
 const {router: api, routePrefix: apiRoutePrefix} = require('~/app/api');
 const compression = require('compression');
 const cors = require('cors');
+const cssModulesHook = require('css-modules-require-hook/preset');
 const EnvEnum = require('~/app/lib/EnvEnum');
 const express = require('express');
 const {createEngine: createReactViewsEngine} = require('express-react-views');
@@ -77,16 +78,10 @@ app.engine(viewExtension, createReactViewsEngine({
   transformViews: true,
 }));
 
-// sub apps
+// static assets
 if (ENV === EnvEnum.DEV) {
   console.log('adding DEV only meta assets');
   app.use('/meta/coverage', express.static(__dirname + '/../reports/coverage/lcov-report'));
-
-  console.log('enabling css-modules');
-  const hook = require('css-modules-require-hook');
-  hook({
-    generateScopedName: '[name]--[local]--[hash:base64:5]',
-  });
 
   console.log('serving js from Webpack middleware');
   const webpack = require('webpack');
@@ -103,6 +98,7 @@ if (ENV === EnvEnum.DEV) {
   app.use(express.static(__dirname + '/../static'));
 }
 
+// sub apps
 app.use(apiRoutePrefix, api);
 app.use(webRoutePrefix, web);
 

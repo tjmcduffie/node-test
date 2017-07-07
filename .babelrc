@@ -5,7 +5,6 @@
   ],
 
   "plugins": [
-    ["babel-plugin-css-modules-transform"],
     ["transform-strict-mode", { "strict": true }],
     ["transform-class-properties", {}],
   ],
