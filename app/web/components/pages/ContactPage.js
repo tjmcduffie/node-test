@@ -1,6 +1,6 @@
 /*global */
 /**
- * 
+ *
  * //flow
  */
 
@@ -15,7 +15,11 @@ const ContactPage = () => {
         <div className="block row">
           <div className="md-col-8 lg-col-5">
             <h2>Shoot me an Email.</h2>
-            <p>Please reach out to me with any comments or inquiries. I can also be found on <a href="http://github.com/tjmcduffie/">Github</a> and <a href="http://www.linkedin.com/in/timmcduffie/">LinkedIn</a>.</p>
+            <p>
+              Please reach out to me with any comments or inquiries. I can also
+              be found on <a href="http://github.com/tjmcduffie/">Github</a> and
+              <a href="http://www.linkedin.com/in/timmcduffie/">LinkedIn</a>.
+            </p>
             <form
               action="/contact/send_mail.php"
               method="post"

@@ -1,6 +1,6 @@
 /*global */
 /**
- * 
+ *
  * @flow
  */
 
@@ -20,6 +20,10 @@ class ContactRoute extends BaseHtmlRoute {
     return contactRoutePath;
   }
 
+  static postPath() {
+    return contactRoutePath;
+  }
+
   constructor(req: $Request, res: $Response) {
     super(req, res);
     this.setPageTitle('Contact Me');
@@ -27,6 +31,11 @@ class ContactRoute extends BaseHtmlRoute {
 
   setDesktopResponse(): ReactElement<*> {
     return React.createElement(ContactPage);
+  }
+
+  post(): void {
+    // @TODO
+    throw new Error('Needs to be implemented');
   }
 }
 

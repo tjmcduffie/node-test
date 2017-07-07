@@ -95,11 +95,9 @@ if (ENV === EnvEnum.DEV) {
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
     noInfo: false,
     compress: true,
-    // lazy: true,
     publicPath: '/',
   }));
 
-  // app.use('/css', express.static(__dirname + '/../build/static/css'));
   app.use('/img', express.static(__dirname + '/../build/static/img'));
 } else {
   app.use(express.static(__dirname + '/../static'));
