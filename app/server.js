@@ -6,10 +6,11 @@
 
 "use strict";
 
+require('css-modules-require-hook/preset');
+
 const {router: api, routePrefix: apiRoutePrefix} = require('~/app/api');
 const compression = require('compression');
 const cors = require('cors');
-const cssModulesHook = require('css-modules-require-hook/preset');
 const EnvEnum = require('~/app/lib/EnvEnum');
 const express = require('express');
 const {createEngine: createReactViewsEngine} = require('express-react-views');
