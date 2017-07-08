@@ -39,16 +39,16 @@ class ContentRouter extends React.Component {
     };
   }
 
-  _routeUriToPage = (location: Location) => {
+  _routeUriToPage = (location: Location): ReactElement<*> => {
     return this._resolve(NavRoutes, location);
   };
 
-  _handleHistoryChange = (location: Location) => {
+  _handleHistoryChange = (location: Location): void => {
     const page = this._routeUriToPage(location);
     this.setState({page});
   };
 
-  _matchURI(path: string, uri: string) {
+  _matchURI(path: string, uri: string): ?Object {
     const keys = [];
     const pattern = pathToRegex(path, keys);
     const match = pattern.exec(uri);
@@ -66,7 +66,7 @@ class ContentRouter extends React.Component {
   _resolve(
     routes: InternalRouteListType,
     context: Location,
-  ) {
+  ): ReactElement<*> {
     for (const route of routes) {
       const uri = context.error ? '/error' : context.pathname;
       const params = this._matchURI(route.path, uri);
@@ -86,7 +86,7 @@ class ContentRouter extends React.Component {
     throw error;
   }
 
-  render() {
+  render(): ReactElement<*> {
     const {page} = this.state;
     return page;
   }
