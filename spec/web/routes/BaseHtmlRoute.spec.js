@@ -15,7 +15,7 @@ describe('The Base HTML Route', () => {
       return '/test';
     }
 
-    setDesktopResponse() {}
+    setDesktopResponse() { return null; }
   }
 
   beforeEach(() => {
@@ -59,9 +59,9 @@ describe('The Base HTML Route', () => {
   });
 
   it('responds to get requests', () => {
-    newBaseRoute.get();
+    expect(newBaseRoute.get).toThrow();
     expect(responseMock.render).not.toHaveBeenCalled();
-    expect(responseMock.sendStatus).toHaveBeenCalledWith(500);
+    expect(responseMock.sendStatus).not.toHaveBeenCalled();
     responseMock.render.calls.reset();
     responseMock.sendStatus.calls.reset();
 

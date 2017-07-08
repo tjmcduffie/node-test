@@ -1,4 +1,4 @@
-/*global */
+/*global ReactClass*/
 /**
  *
  * @flow
@@ -14,7 +14,7 @@ const DefaultContainer = require('~/app/web/components/layout/DefaultContainer')
 const React = require('react');
 
 class BaseHtmlRoute {
-  _container: ReactElement<*>;
+  _container: ReactClass<*>;
   _layoutView: string;
   _pageTitle: string;
   _req: $Request;
@@ -28,11 +28,11 @@ class BaseHtmlRoute {
     this._res = res;
   }
 
-  getContainer(): string {
+  getContainer(): ReactClass<*> {
     return this._container;
   }
 
-  setContainer(container: ReactElement<*>): void {
+  setContainer(container: ReactClass<*>): void {
     this._container = container;
   }
 
