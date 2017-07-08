@@ -6,9 +6,9 @@
 
 "use strict";
 
-const React = require('react');
-
 import type {Element as ReactElement} from 'react';
+
+const React = require('react');
 
 module.exports = function Default(props: {
   children?: Array<ReactElement<*>> | ReactElement<*>,
