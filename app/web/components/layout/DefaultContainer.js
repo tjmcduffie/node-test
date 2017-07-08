@@ -14,7 +14,9 @@ const Header = require('~/app/web/components/layout/Header');
 const IdEnum = require('~/app/lib/IdEnum');
 const React = require('react');
 
-module.exports = function Main(): ReactElement<*> {
+module.exports = function Main(props: {
+  children?: Array<ReactElement<*>> | ReactElement<*>,
+}): ReactElement<*> {
   return (
     <div>
       <div id={IdEnum.HEADER}>
