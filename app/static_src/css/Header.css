@@ -1,12 +1,13 @@
 /**
  * HEADER
  */
-/* line 339, ../../src/sass/ben.scss */
-.header {
+.root {
   background-color: rgba(255, 255, 255, 0.93);
   color: #1fe7a8;
   bottom: auto;
   left: 0;
+  padding-bottom: 15px;
+  padding-top: 15px;
   position: fixed;
   right: 0;
   top: 0;
@@ -16,31 +17,24 @@
   transition: background-color 500ms;
   z-index: 1000;
 }
-/* line 347, ../../src/sass/ben.scss */
-.header .block {
-  padding-bottom: 15px;
-  padding-top: 15px;
-}
 @media (min-width: 860px) {
-  /* line 353, ../../src/sass/ben.scss */
-  .header .block {
+  .root {
     padding-bottom: 0;
     padding-top: 0;
   }
 }
-/* line 359, ../../src/sass/ben.scss */
-.header header {
+
+.header {
   margin: 0;
 }
 @media (min-width: 860px) {
-  /* line 359, ../../src/sass/ben.scss */
-  .header header {
+  .header {
     margin-bottom: 20px;
     margin-top: 20px;
   }
 }
-/* line 367, ../../src/sass/ben.scss */
-.header header h1 {
+
+.title {
   background: no-repeat url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAA7BAMAAABrgaykAAAAFVBMVEUe6KczMzPq6+v///8e6KczMzPq6+s/jG0ZAAAABHRSTlMAAAAAs5NmmgAAAERJREFUKM9jcAECB2ZjY2MDBuozGQUFBQUYwADCTAOChFAgCAAzk2jAVAIBRbBtIIEgBDNQGOyyUSYpTEFE8EHCl0ZMAG9inANy5BT2AAAAAElFTkSuQmCC') center left;
   background-size: contain;
   color: #1fe7a8;
@@ -59,14 +53,12 @@
   transition: color 500ms;
 }
 @media (min-width: 0px) and (max-width: 659px) {
-  /* line 367, ../../src/sass/ben.scss */
-  .header header h1 {
+  .title {
     font-weight: bold;
   }
 }
 @media (min-width: 660px) {
-  /* line 367, ../../src/sass/ben.scss */
-  .header header h1 {
+  .title {
     font-size: 28px;
     font-size: 1.75rem;
     line-height: 58px;
@@ -75,27 +67,25 @@
     line-height: 1.75rem;
   }
 }
-/* line 454, ../../src/sass/ben.scss */
-.header .hamburger {
+
+.hamburger {
   display: inline-block;
   height: 20px;
   margin-bottom: -4px;
   width: 40px;
 }
 @media (min-width: 660px) {
-  /* line 454, ../../src/sass/ben.scss */
-  .header .hamburger {
+  .hamburger {
     height: 40px;
   }
 }
 @media (min-width: 860px) {
-  /* line 454, ../../src/sass/ben.scss */
-  .header .hamburger {
+  .hamburger {
     display: none;
   }
 }
-/* line 468, ../../src/sass/ben.scss */
-.header .hamburger .patty {
+
+.patty {
   background-color: #1fe7a8;
   display: block;
   height: 4px;
@@ -110,16 +100,15 @@
   transition: background-color 500ms;
 }
 @media (min-width: 660px) {
-  /* line 468, ../../src/sass/ben.scss */
-  .header .hamburger .patty {
+  .patty {
     -moz-transform: translateY(18px);
     -ms-transform: translateY(18px);
     -webkit-transform: translateY(18px);
     transform: translateY(18px);
   }
 }
-/* line 477, ../../src/sass/ben.scss */
-.header .hamburger .patty::before, .header .hamburger .patty::after {
+
+.patty::before, .patty::after {
   background-color: #1fe7a8;
   display: block;
   height: 4px;
@@ -134,64 +123,60 @@
   -webkit-transition: all 500ms;
   transition: all 500ms;
 }
-/* line 484, ../../src/sass/ben.scss */
-.header .hamburger .patty::before {
+
+.patty::before {
   -moz-transform: translate3d(0, -8px, 0);
   -ms-transform: translate3d(0, -8px, 0);
   -webkit-transform: translate3d(0, -8px, 0);
   transform: translate3d(0, -8px, 0);
 }
 @media (min-width: 660px) {
-  /* line 484, ../../src/sass/ben.scss */
-  .header .hamburger .patty::before {
+  .patty::before {
     -moz-transform: translate3d(0, -12px, 0);
     -ms-transform: translate3d(0, -12px, 0);
     -webkit-transform: translate3d(0, -12px, 0);
     transform: translate3d(0, -12px, 0);
   }
 }
-/* line 492, ../../src/sass/ben.scss */
-.header .hamburger .patty::after {
+
+.patty::after {
   -moz-transform: translate3d(0, 4px, 0);
   -ms-transform: translate3d(0, 4px, 0);
   -webkit-transform: translate3d(0, 4px, 0);
   transform: translate3d(0, 4px, 0);
 }
 @media (min-width: 660px) {
-  /* line 492, ../../src/sass/ben.scss */
-  .header .hamburger .patty::after {
+  .patty::after {
     -moz-transform: translate3d(0, 8px, 0);
     -ms-transform: translate3d(0, 8px, 0);
     -webkit-transform: translate3d(0, 8px, 0);
     transform: translate3d(0, 8px, 0);
   }
 }
-/* line 505, ../../src/sass/ben.scss */
-.header .hamburger:hover .patty::before {
+
+.hamburger:hover .patty::before {
   -moz-transform: translate3d(0, -12px, 0);
   -ms-transform: translate3d(0, -12px, 0);
   -webkit-transform: translate3d(0, -12px, 0);
   transform: translate3d(0, -12px, 0);
 }
 @media (min-width: 660px) {
-  /* line 505, ../../src/sass/ben.scss */
-  .header .hamburger:hover .patty::before {
+  .hamburger:hover .patty::before {
     -moz-transform: translate3d(0, -16px, 0);
     -ms-transform: translate3d(0, -16px, 0);
     -webkit-transform: translate3d(0, -16px, 0);
     transform: translate3d(0, -16px, 0);
   }
 }
-/* line 513, ../../src/sass/ben.scss */
-.header .hamburger:hover .patty::after {
+
+.hamburger:hover .patty::after {
   -moz-transform: translate3d(0, 8px, 0);
   -ms-transform: translate3d(0, 8px, 0);
   -webkit-transform: translate3d(0, 8px, 0);
   transform: translate3d(0, 8px, 0);
 }
 @media (min-width: 660px) {
-  /* line 513, ../../src/sass/ben.scss */
-  .header .hamburger:hover .patty::after {
+  .hamburger:hover .patty::after {
     -moz-transform: translate3d(0, 12px, 0);
     -ms-transform: translate3d(0, 12px, 0);
     -webkit-transform: translate3d(0, 12px, 0);
@@ -199,43 +184,40 @@
   }
 }
 @media (max-width: 860px) {
-  /* line 525, ../../src/sass/ben.scss */
-  .header.expanded {
+  .root.expanded {
     background-color: rgba(31, 231, 168, 0.93);
     height: 100%;
-  }
-  /* line 529, ../../src/sass/ben.scss */
-  .header.expanded .block {
     margin-left: 0;
     margin-right: 0;
     padding-left: 2%;
     padding-right: 2%;
   }
-  /* line 536, ../../src/sass/ben.scss */
-  .header.expanded header {
+
+  .root.expanded .header {
     transform: translate3d(0px, 0px, 0px) !important;
   }
-  /* line 540, ../../src/sass/ben.scss */
-  .header.expanded h1 {
+
+  .root.expanded .title {
     color: white;
   }
-  /* line 551, ../../src/sass/ben.scss */
-  .header.expanded .hamburger .patty {
+
+  .root.expanded .patty {
     background-color: transparent;
   }
-  /* line 554, ../../src/sass/ben.scss */
-  .header.expanded .hamburger .patty::before, .header.expanded .hamburger .patty::after {
+
+  .root.expanded .patty::before,
+  .root.expanded .patty::after {
     background-color: white;
   }
-  /* line 558, ../../src/sass/ben.scss */
-  .header.expanded .hamburger .patty::before {
+
+  .root.expanded .patty::before {
     -moz-transform: rotate(45deg) translate3d(0, 0, 0);
     -ms-transform: rotate(45deg) translate3d(0, 0, 0);
     -webkit-transform: rotate(45deg) translate3d(0, 0, 0);
     transform: rotate(45deg) translate3d(0, 0, 0);
   }
-  /* line 562, ../../src/sass/ben.scss */
-  .header.expanded .hamburger .patty::after {
+
+  .root.expanded .patty::after {
     -moz-transform: rotate(-45deg) translate3d(0, -4px, 0);
     -ms-transform: rotate(-45deg) translate3d(0, -4px, 0);
     -webkit-transform: rotate(-45deg) translate3d(0, -4px, 0);

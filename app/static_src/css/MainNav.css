@@ -1,34 +1,4 @@
-.largeColumn6Width {
-  width: 48.57143%;
-}
-
-.largeColumnFloat {
-  float: left;
-}
-
-.largeColumn6MarginRight {
-  margin-right: 2.85714%;
-}
-
-@media (min-width: 860px) {
-  .largeColumnFloat {
-    float: right;
-  }
-
-  .largeColumn6MarginRight {
-    margin-right: 0;
-  }
-}
-
-@media (min-width: 860px) {
-  .hiddenFromLarge {
-    display: none;
-  }
-}
-
 .nav {
-  composes: largeColumn6Width largeColumnFloat largeColumn6MarginRight;
-  display: none;
   clear: both;
   font-family: "Source Sans Pro", sans-serif;
   font-size: 19px;
@@ -71,14 +41,6 @@
 }
 @media (min-width: 860px) {
   .item {
-    composes: hiddenFromLarge;
     display: inline-block;
-  }
-}
-
-@media (max-width: 860px) {
-  .expanded .nav {
-    display: block;
-    padding-top: 25px;
   }
 }
