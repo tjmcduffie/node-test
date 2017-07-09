@@ -10,7 +10,7 @@ import type {$Request, $Response} from 'express';
 import type {Element as ReactElement} from 'react';
 
 const BaseHtmlRoute = require('~/app/web/routes/BaseHtmlRoute');
-const ErrorNotFoundPage = require('~/app/web/components/pages/ErrorNotFoundPage');
+const ErrorNotFoundPage = require('~/app/web/pages/ErrorNotFoundPage');
 const React = require('react');
 
 const errorNotFoundRoutePath: string = '*'

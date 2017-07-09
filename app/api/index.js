@@ -1,13 +1,13 @@
 /*global */
 /**
- * 
+ *
  * //flow
  */
 
 "use strict";
 
 const express = require('express');
-const TestRoute = require('~/app/api/TestRoute');
+const SampleRoute = require('~/app/api/SampleRoute');
 
 const router = express.Router();
 const ROUTE_PREFIX = '/api';
@@ -16,7 +16,7 @@ const ROUTE_PREFIX = '/api';
 
 // routes
 [
-  TestRoute,
+  SampleRoute,
 ].forEach(Route => {
   router.route(Route.getPath())
     .delete((req, res, next) => (new Route(req, res, next)).delete())

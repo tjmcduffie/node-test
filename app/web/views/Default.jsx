@@ -25,7 +25,6 @@ module.exports = function Default(props: {
         <title>
           {props.title}
         </title>
-        <link href="/css/inline.bundle.css" rel="stylesheet" />
         <link href="/css/header.bundle.css" rel="stylesheet" />
         <link href="/css/content.bundle.css" rel="stylesheet" />
       </head>

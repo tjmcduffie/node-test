@@ -10,24 +10,24 @@ import type {$Request, $Response} from 'express';
 import type {Element as ReactElement} from 'react';
 
 const BaseHtmlRoute = require('~/app/web/routes/BaseHtmlRoute');
-const HomePage = require('~/app/web/components/pages/HomePage');
+const SamplePage = require('~/app/web/pages/SamplePage');
 const React = require('react');
 
-const homeRoutePath: string = '/';
+const SampleRoutePath: string = '/';
 
-class HomeRoute extends BaseHtmlRoute {
+class SampleRoute extends BaseHtmlRoute {
   static getPath(): string {
-    return homeRoutePath;
+    return SampleRoutePath;
   }
 
   constructor(req: $Request, res: $Response): void {
     super(req, res);
-    this.setPageTitle('Home');
+    this.setPageTitle('Sample');
   }
 
   setDesktopResponse(): ReactElement<*> {
-    return React.createElement(HomePage);
+    return React.createElement(SamplePage);
   }
 }
 
-module.exports = HomeRoute;
+module.exports = SampleRoute;

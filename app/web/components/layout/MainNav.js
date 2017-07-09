@@ -12,7 +12,7 @@ type Props = {
   className?: string,
 }
 
-const InternalLink = require('~/app/web/components/global/InternalLink');
+const InternalLink = require('~/app/lib/components/InternalLink');
 const NavRoutes = require('~/app/web/generated/NavRoutes');
 const React = require('react');
 

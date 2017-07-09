@@ -1,6 +1,6 @@
 /*global */
 /**
- * 
+ *
  * //flow
  */
 
@@ -8,7 +8,7 @@
 
 const React = require('react');
 
-const HomePage = () => {
+const SamplePage = () => {
   return (
     <article className="home-page">
       <div className="title" id="title">
@@ -96,4 +96,4 @@ const HomePage = () => {
   );
 }
 
-module.exports = HomePage;
+module.exports = SamplePage;

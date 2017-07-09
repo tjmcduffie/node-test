@@ -1,15 +1,13 @@
 /*global */
 /**
- * 
+ *
  * //flow
  */
 
 "use strict";
 
-const ContactRoute = require('~/app/web/routes/ContactRoute');
-const ErrorNotFoundRoute = require('~/app/web/routes/ErrorNotFoundRoute');
 const express = require('express');
-const HomeRoute = require('~/app/web/routes/HomeRoute');
+const SampleRoute = require('~/app/web/routes/SampleRoute');
 
 const router = express.Router();
 const ROUTE_PREFIX = '';
@@ -18,9 +16,7 @@ const ROUTE_PREFIX = '';
 
 // routes
 const routes = [
-  HomeRoute,
-  ContactRoute,
-  ErrorNotFoundRoute,
+  SampleRoute,
 ]
 routes.forEach(Route => {
   router.route(Route.getPath())

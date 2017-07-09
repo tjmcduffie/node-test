@@ -2,13 +2,13 @@
 
 const server = require('~/app/server');
 const request = require('superagent');
-const HomeRoute = require('~/app/web/routes/HomeRoute')
+const SampleRoute = require('~/app/web/routes/SampleRoute')
 
 const PORT = 3001;
-const PATH = HomeRoute.getPath();
+const PATH = SampleRoute.getPath();
 const uri = `http://localhost:${PORT}${PATH}`;
 
-describe('The Home page', () => {
+describe('The Sample page', () => {
   let app
 
   afterEach(() => {

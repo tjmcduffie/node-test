@@ -7,7 +7,7 @@
 "use strict";
 
 const Header = require('~/app/web/components/layout/Header');
-const IdEnum = require('~/app/lib/IdEnum');
+const IdEnum = require('~/app/web/components/IdEnum');
 const React = require('react');
 const ReactDOM = require('react-dom');
 const runWhenReady = require('~/app/lib/util/runWhenReady');

@@ -1,6 +1,6 @@
 /*global */
 /**
- * 
+ *
  * //flow
  */
 
@@ -21,51 +21,27 @@ export type InternalRouteListType = Array<InternalRouteType>;
 
 module.exports = [
   {
-    key: 'home',
-    module: require('~/app/web/components/pages/HomePage'),
-    modulePath: '~/app/web/components/pages/HomePage',
-    name: 'Home',
+    key: 'sample',
+    module: require('~/app/web/pages/SamplePage'),
+    modulePath: '~/app/web/pages/SamplePage',
+    name: 'Sample',
     path: '/',
     action: () => {
-      const HomePage = require('~/app/web/components/pages/HomePage');
+      const SamplePage = require('~/app/web/pages/SamplePage');
       return (
-        <HomePage />
+        <SamplePage />
       );
     },
   },{
-    key: 'about',
-    module: require('~/app/web/components/pages/ErrorNotFoundPage'),
-    modulePath: '~/app/web/components/pages/ErrorNotFoundPage',
-    name: 'About',
-    path: '/about',
+    key: 'not-found',
+    module: require('~/app/web/pages/ErrorNotFoundPage'),
+    modulePath: '~/app/web/pages/ErrorNotFoundPage',
+    name: 'Not Found',
+    path: '/not-found',
     action: () => {
-      const ErrorNotFoundPage = require('~/app/web/components/pages/ErrorNotFoundPage');
+      const ErrorNotFoundPage = require('~/app/web/pages/ErrorNotFoundPage');
       return (
         <ErrorNotFoundPage />
-      );
-    },
-  },{
-    key: 'work',
-    module: require('~/app/web/components/pages/ErrorNotFoundPage'),
-    modulePath: '~/app/web/components/pages/ErrorNotFoundPage',
-    name: 'Work',
-    path: '/work',
-    action: () => {
-      const ErrorNotFoundPage = require('~/app/web/components/pages/ErrorNotFoundPage');
-      return (
-        <ErrorNotFoundPage />
-      );
-    },
-  },{
-    key: 'contact',
-    module: require('~/app/web/components/pages/ContactPage'),
-    modulePath: '~/app/web/components/pages/ContactPage',
-    name: 'Contact',
-    path: '/contact',
-    action: () => {
-      const ContactPage = require('~/app/web/components/pages/ContactPage');
-      return (
-        <ContactPage />
       );
     },
   },
