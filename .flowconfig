@@ -1,9 +1,9 @@
 [ignore]
 .*/node_modules/config-chain/test/broken.json
+.*/node_modules/.cache/*
 .*/build/*
 
 [include]
-.*/node_modules/*
 
 [libs]
 

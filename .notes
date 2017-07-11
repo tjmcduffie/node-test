@@ -19,6 +19,8 @@ hosting options
 - https://cloud.google.com/free/
 - https://www.godaddy.com/pro/one-click-installation/node-js
 - https://cloudno.de/pricing
+- https://mlab.com/plans/pricing/ (free 0.5GB mongodb hosting)
+https://www.mongodb.com/cloud/atlas/pricing (free 0.5GB mongodb hosting)
 
 other considerations
 - [react starter kit](https://github.com/kriasoft/react-starter-kit)
