@@ -12,7 +12,7 @@ type Props = {
   className?: string,
 }
 
-const InternalLink = require('~/app/lib/components/InternalLink');
+const Button = require('~/app/web/components/global/Button');
 const NavRoutes = require('~/app/web/generated/NavRoutes');
 const React = require('react');
 
@@ -27,7 +27,7 @@ class MainNav extends React.PureComponent {
       <nav
         className={cx(
           this.props.className,
-          styles.nav,
+          styles.root,
         )}
       >
         <ul className={styles.list}>
@@ -37,9 +37,13 @@ class MainNav extends React.PureComponent {
                 className={styles.item}
                 key={route.key}
               >
-                <InternalLink href={route.path} route={route}>
+                <Button
+                  href={route.path}
+                  route={route}
+                  theme={Button.theme.GREEN}
+                >
                   {route.name}
-                </InternalLink>
+                </Button>
               </li>
             )
           })}
