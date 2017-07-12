@@ -1,0 +1,49 @@
+/**
+ * Button
+ */
+.root {
+  display: block;
+  padding: 15px 18px;
+  position: relative;
+  text-decoration: none;
+  text-transform: uppercase;
+  -moz-transition: all 500ms;
+  -o-transition: all 500ms;
+  -webkit-transition: all 500ms;
+  transition: all 500ms;
+}
+
+.root::before {
+  bottom: 0;
+  content: '';
+  height: 10px;
+  left: 0;
+  position: absolute;
+  width: 10px;
+}
+
+.green {
+  background-color: #1fe7a8;
+  color: white;
+}
+
+.green::before {
+  background-color: white;
+}
+
+.green:hover {
+  color: #333333;
+}
+
+.grey {
+  background-color: #333333;
+  color: #1fe7a8;
+}
+
+.grey::before {
+  background-color: #1fe7a8;
+}
+
+.grey:hover {
+  color: white;
+}
