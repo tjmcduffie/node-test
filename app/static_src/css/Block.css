@@ -1,0 +1,62 @@
+/**
+ * Block
+ */
+.root {
+  overflow: hidden;
+  position: relative;
+}
+
+.green {
+  background-color: #1fe7a8;
+  color: #333;
+}
+
+.grey {
+  background-color: #e8e8e8;
+  color: #333;
+}
+
+.gridDark {
+  background: #333333 repeat url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAgMAAABjUWAiAAAADFBMVEUe6Kf///8e6Kce6KfC6RU/AAAABHRSTlMAAAcNgmOM4AAAAC1JREFUKM9jYFBgYGJgMAARCgEM5PJWgcEuMLmAgTpmDge3/EcCH0bDhbpuAQCVslH5M2tyuwAAAABJRU5ErkJggg==') center;
+  color: #fff;
+}
+
+.gridLight {
+  background: repeat url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyAgMAAABjUWAiAAAACVBMVEUAAAAAAAAAAACDY+nAAAAAA3RSTlMADRqyukPpAAAALElEQVQoz2NgcGBgYWBoABEODAzk8kLBYCqYDGCgjpnDwS2rkMCC0XChrlsAgjFJMdWr1GMAAAAASUVORK5CYII=') center;
+  background-color: white;
+}
+
+.none {
+  color: #1fe7a8;
+}
+
+.white {
+  background: #ffffff;
+  color: #1fe7a8;
+}
+
+.inner {
+  max-width: 62.75rem;
+  margin-left: 2%;
+  margin-right: 2%;
+  padding-bottom: 40px;
+  padding-top: 50px;
+}
+@media (min-width: 660px) {
+  .inner {
+    padding-bottom: 60px;
+    padding-top: 75px;
+  }
+}
+@media (min-width: 860px) {
+  .inner {
+    padding-bottom: 80px;
+    padding-top: 100px;
+  }
+}
+@media (min-width: 1044px) {
+  .inner {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
