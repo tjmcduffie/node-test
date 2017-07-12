@@ -91,6 +91,7 @@ if (ENV === EnvEnum.DEV) {
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
     noInfo: false,
     compress: true,
+    lazy: true,
     publicPath: '/',
   }));
 
