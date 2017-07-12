@@ -21,9 +21,10 @@ class InternalLink extends React.PureComponent {
   _history: ?BrowserHistory;
   props: {
     children?: Array<ReactElement<*>> | ReactElement<*>,
+    className?: string,
     href: string,
-    onClick?: (e: SyntheticEvent) => void,
-    route: InternalRouteType,
+    onClick?: (e: Event) => void,
+    route?: InternalRouteType,
   }
 
   constructor(props: *) {
@@ -32,7 +33,7 @@ class InternalLink extends React.PureComponent {
   }
 
   _handleClick = (e: SyntheticEvent): void => {
-    if (!this._history) {
+    if (!this._history || this.props.route) {
       // handle the link normally.
       return;
     }
@@ -52,6 +53,7 @@ class InternalLink extends React.PureComponent {
   render() {
     return (
       <a
+        className={this.props.className}
         href={this.props.href}
         onClick={this._handleClick}
       >
