@@ -31,6 +31,7 @@ module.exports = {
               'flow',
             ],
             plugins: [
+              ["transform-object-rest-spread"],
               ["transform-strict-mode", { "strict": true }],
               ["transform-class-properties", {}],
             ]
