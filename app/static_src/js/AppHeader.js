@@ -1,7 +1,7 @@
 /*global */
 /**
  *
- * //flow
+ * @flow
  */
 
 "use strict";

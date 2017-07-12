@@ -1,12 +1,12 @@
 /*global */
 /**
  *
- * //flow
+ * @flow
  */
 
 "use strict";
 
-const ContentRouter = require('~/app/lib/components/ContentRouter');
+const ContentRouter = require('~/app/web/components/global/ContentRouter');
 const Footer = require('~/app/web/components/layout/Footer');
 const IdEnum = require('~/app/web/components/IdEnum');
 const React = require('react');
