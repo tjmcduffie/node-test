@@ -3,7 +3,9 @@ node_modules/*
 flow-typed/*
 .nyc_output/*
 app/log/*
+app/scripts/*
 build/log/*
+db/*
 
 .eslintignore
 .flowconfig

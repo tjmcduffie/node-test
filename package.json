@@ -21,6 +21,9 @@
     "build:prep:symlink": "mkdir build/node_modules && cd build && npm install ../node_modules/wavy && cd -",
     "build:server": "babel app -d build/app",
     "check": "npm run flow && npm run lint && npm run test:coverage:check",
+    "db:seed:create": "node ./app/scripts/seedData.js -c",
+    "db:seed:remove": "node ./app/scripts/seedData.js -r",
+    "db:seed:reset": "node ./app/scripts/seedData.js -R",
     "db:start": "mongod --fork --config ./mongodb.conf --logpath ./build/log/mongodb.log",
     "db:stop": "mongod --shutdown",
     "flow": "flow",
@@ -57,6 +60,7 @@
     "wavy": "^1.0.4"
   },
   "devDependencies": {
+    "args": "^3.0.2",
     "babel-cli": "^6.24.1",
     "babel-core": "^6.24.1",
     "babel-eslint": "^7.2.3",
@@ -76,6 +80,7 @@
     "babel-preset-flow": "^6.23.0",
     "babel-preset-react": "^6.24.1",
     "babel-watch": "^2.0.6",
+    "chalk": "^2.0.1",
     "css-loader": "^0.28.4",
     "css-modules-require-hook": "^4.0.6",
     "es2015": "0.0.0",
