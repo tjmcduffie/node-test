@@ -7,7 +7,6 @@
 "use strict";
 
 const express = require('express');
-const SampleRoute = require('~/app/web/routes/SampleRoute');
 
 const router = express.Router();
 const ROUTE_PREFIX = '';
@@ -16,7 +15,9 @@ const ROUTE_PREFIX = '';
 
 // routes
 const routes = [
-  SampleRoute,
+  require('~/app/web/routes/SampleRoute'),
+  require('~/app/web/routes/CitiesRoute'),
+  require('~/app/web/routes/CityRoute'),
 ]
 routes.forEach(Route => {
   router.route(Route.getPath())
