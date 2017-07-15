@@ -31,7 +31,7 @@ const connect = () => {
       reject(err);
     });
 
-    mongoose.connection.on('connected', function(ref) {
+    mongoose.connection.on('connected', function() {
       console.log(chalk.blue(`Connected to ${DB_NAME} DB!`));
       resolve();
     });
@@ -45,7 +45,9 @@ const create = () => {
         if (err) {
           return reject(err);
         }
-        console.log(chalk.yellow(` - created ${city.name}, ${city.state}`));
+        console.log(
+          chalk.yellow(` - created ${cityDoc.name}, ${cityDoc.state}`)
+        );
         resolve();
       })
     });
