@@ -1,5 +1,9 @@
 helpers
 - [flow cheat sheet](https://www.saltycrane.com/blog/2016/06/flow-type-cheat-sheet/#lib/react.js)
+
+APIs
+- [real estate](https://gist.github.com/patpohler/36c731113fd113418c0806f62cbb9e30)
+
 packages
 - node-dev might be a replacement for nodemon
 - Bunyan or Winston might be companion loggers to Morgan
