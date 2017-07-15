@@ -25,7 +25,7 @@
     "db:seed:remove": "node ./app/scripts/seedData.js -r",
     "db:seed:reset": "node ./app/scripts/seedData.js -R",
     "db:start": "mongod --fork --config ./mongodb.conf --logpath ./build/log/mongodb.log",
-    "db:stop": "mongod --shutdown",
+    "db:stop": "mongo admin --eval 'db.shutdownServer()'",
     "flow": "flow",
     "lint": "eslint --ext .js,.jsx app/** spec/**",
     "test": "export NODE_ENV='test' && babel-node spec/jasmine.js",
