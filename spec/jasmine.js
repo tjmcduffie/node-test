@@ -1,5 +1,6 @@
 "use strict";
 
+const Database = require('~/app/lib/Database');
 const Jasmine = require('jasmine');
 const {SpecReporter} = require('jasmine-spec-reporter');
 
@@ -11,4 +12,4 @@ jasmine.addReporter(new SpecReporter({
     displayPending: true,
   },
 }));
-jasmine.execute()
+Database.connect().then(jasmine.execute());

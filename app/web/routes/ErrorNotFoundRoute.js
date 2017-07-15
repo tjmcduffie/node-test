@@ -25,8 +25,8 @@ class ErrorNotFoundRoute extends BaseHtmlRoute {
     this.setPageTitle('Error, page not found');
   }
 
-  setDesktopResponse(): ReactElement<*> {
-    return React.createElement(ErrorNotFoundPage);
+  setDesktopResponse(data: {}): ReactElement<*> {
+    return React.createElement(ErrorNotFoundPage, data);
   }
 }
 

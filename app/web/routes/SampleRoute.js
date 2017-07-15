@@ -25,8 +25,8 @@ class SampleRoute extends BaseHtmlRoute {
     this.setPageTitle('Sample');
   }
 
-  setDesktopResponse(): ReactElement<*> {
-    return React.createElement(SamplePage);
+  setDesktopResponse(data: {}): ReactElement<*> {
+    return React.createElement(SamplePage, data);
   }
 }
 

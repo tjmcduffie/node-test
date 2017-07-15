@@ -52,27 +52,47 @@ class BaseHtmlRoute {
     this._pageTitle = title;
   }
 
-  setDesktopResponse(): ReactElement<*> {
+  setDesktopResponse(data: Object): ReactElement<*> {
+    if (!data) {
+      throw new BaseHtmlRouteError('setDesktopResponse needs a data param');
+    }
     throw new BaseHtmlRouteError('setDesktopResponse needs to be implemented');
   }
 
+  genData(): Promise<Object> {
+    return new Promise(resolve => {
+      resolve({});
+    });
+  }
+
   get(): void {
-    let pageContainer: ?ReactElement<*> = null;
-    let pageContent: ?Array<ReactElement<*>>|ReactElement<*> = null;
+    let pageContainer: ?ReactElement<*>;
+    let pageContent: ?Array<ReactElement<*>>|ReactElement<*>;
 
     try {
-      pageContent = this.setDesktopResponse();
-      pageContainer = React.createElement(this.getContainer(), {pageContent});
+      this.genData()
+        .then((pageData: Object): void => {
+          const containerData = {
+            pageData,
+            pageContent,
+          };
+          pageContent = this.setDesktopResponse(pageData);
+          pageContainer = React.createElement(
+            this.getContainer(),
+            containerData
+          );
+
+          this._res
+            .render(this.getLayoutView(), {
+              title: this.getPageTitle(),
+              children: pageContainer,
+              initialData: pageData,
+            });
+        });
     } catch (e) {
       this._res.sendStatus(500);
       throw e;
     }
-
-    this._res
-      .render(this.getLayoutView(), {
-        title: this.getPageTitle(),
-        children: pageContainer,
-      });
   }
 }
 
