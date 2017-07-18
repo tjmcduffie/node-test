@@ -7,12 +7,12 @@
 "use strict";
 
 import type {BrowserHistory} from '~/app/lib/util/browserHistory';
-import type {InternalRouteListType} from '~/app/web/generated/NavRoutes';
+import type {InternalRouteListType} from '~/app/lib/InternalRouteType';
 import type {Element as ReactElement} from 'react';
 
 const BaseError = require('~/app/lib/BaseError');
 const browserHistory = require('~/app/lib/util/browserHistory')();
-const NavRoutes = require('~/app/web/generated/NavRoutes');
+const AllRoutes = require('~/app/web/generated/AllRoutes');
 const pathToRegex = require('path-to-regexp');
 const React = require('react');
 
@@ -40,7 +40,7 @@ class ContentRouter extends React.Component {
   }
 
   _routeUriToPage = (location: Location): ReactElement<*> => {
-    return this._resolve(NavRoutes, location);
+    return this._resolve(AllRoutes, location);
   };
 
   _handleHistoryChange = (location: Location): void => {
@@ -67,6 +67,7 @@ class ContentRouter extends React.Component {
     routes: InternalRouteListType,
     context: Location,
   ): ReactElement<*> {
+    let result;
     for (const route of routes) {
       const uri = context.error ? '/error' : context.pathname;
       const params = this._matchURI(route.path, uri);
@@ -74,16 +75,18 @@ class ContentRouter extends React.Component {
         continue;
       }
 
-      const result = route.action({ context, params });
+      result = route.action({context, params});
       if (result) {
-        return result
+        break;
       }
     }
 
-    // if we get here there are no matches
-    const error = new ContentRouterError('Not found');
-    error.status = 404;
-    throw error;
+    if (!result) {
+      const error = new ContentRouterError('Not found');
+      error.status = 404;
+      throw error;
+    }
+    return result;
   }
 
   render(): ReactElement<*> {

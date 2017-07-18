@@ -1,4 +1,4 @@
-/*global SyntheticEvent*/
+/*global */
 /**
  *
  * @flow
@@ -7,7 +7,7 @@
 "use strict";
 
 import type {BrowserHistory} from '~/app/lib/util/browserHistory';
-import type {InternalRouteType} from '~/app/web/generated/NavRoutes';
+import type {InternalRouteType} from '~/app/lib/InternalRouteType';
 import type {Element as ReactElement} from 'react';
 
 const BaseError = require('~/app/lib/BaseError');
@@ -15,14 +15,15 @@ const browserHistory = require('~/app/lib/util/browserHistory')();
 const React = require('react');
 const URIParser = require('~/app/lib/util/URIParser');
 
-class InternalLinkError extends BaseError {}
+class LinkError extends BaseError {}
 
-class InternalLink extends React.PureComponent {
+class Link extends React.PureComponent {
   _history: ?BrowserHistory;
   props: {
     children?: Array<ReactElement<*>> | ReactElement<*>,
     className?: string,
     href: string,
+    isExternal?: boolean,
     onClick?: (e: Event) => void,
     route?: InternalRouteType,
   }
@@ -32,15 +33,15 @@ class InternalLink extends React.PureComponent {
     this._history = browserHistory;
   }
 
-  _handleClick = (e: SyntheticEvent): void => {
-    if (!this._history || this.props.route) {
+  _handleClick = (e: Event): void => {
+    if (this.props.isExternal) {
       // handle the link normally.
       return;
     }
 
     e.preventDefault();
     if (typeof e.currentTarget.href !== 'string') {
-      throw new InternalLinkError('Link doesn\'t have an href to parse');
+      throw new LinkError('Link doesn\'t have an href to parse');
     }
     const parsedURI = new URIParser(e.currentTarget.href);
     // flow complains without this additional check. lame.
@@ -63,4 +64,4 @@ class InternalLink extends React.PureComponent {
   }
 }
 
-module.exports = InternalLink;
+module.exports = Link;

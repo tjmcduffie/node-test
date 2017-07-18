@@ -36,5 +36,27 @@ module.exports = [
         <CitiesPage />
       );
     },
+  },{
+    key: 'city',
+    name: 'City',
+    path: '/city/',
+    route: '/city/:state/:cityname',
+    action: (): ReactElement<*> => {
+      const CityPage = require('~/app/web/pages/CityPage');
+      return (
+        <CityPage />
+      );
+    },
+  },{
+    key: 'not-found',
+    name: 'ErrorNotFound',
+    path: '/*',
+    route: '/*',
+    action: (): ReactElement<*> => {
+      const ErrorNotFoundPage = require('~/app/web/pages/ErrorNotFoundPage');
+      return (
+        <ErrorNotFoundPage />
+      );
+    },
   },
 ]
