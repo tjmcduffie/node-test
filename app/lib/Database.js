@@ -12,17 +12,16 @@ const DB_NAME = 'grimlock-city-living';
 
 const connect = (): Promise<*> => {
   return new Promise((resolve, reject) => {
-    mongoose.connect(`mongodb://localhost/${DB_NAME}`, {auto_reconnect: true});
-
-    mongoose.connection.on('error', function(err) {
-      console.error(`Failed to connect to DB ${DB_NAME} on startup`, err);
-      reject(err);
-    });
-
-    mongoose.connection.on('connected', function() {
-      console.log(`Connected to ${DB_NAME} DB!`);
-      resolve();
-    });
+    mongoose
+      .connect(`mongodb://localhost/${DB_NAME}`, {useMongoClient: true})
+      .then(() => {
+        console.log(`Connected to ${DB_NAME} DB!`);
+        resolve();
+      })
+      .catch(err => {
+        console.error(`Failed to connect to DB ${DB_NAME} on startup`, err);
+        reject(err);
+      });
   });
 }
 
