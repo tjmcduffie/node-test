@@ -75,7 +75,7 @@ const viewExtension = !(ENV === EnvEnum.DEV || ENV === EnvEnum.TEST)
 app.set('views', __dirname + '/web/views');
 app.set('view engine', viewExtension);
 app.engine(viewExtension, createReactViewsEngine({
-  beautify: true,
+  beautify: false,
   transformViews: true,
 }));
 
@@ -89,7 +89,7 @@ if (ENV === EnvEnum.DEV) {
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackConfig = require('~/webpack.config');
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
-    noInfo: false,
+    noInfo: true,
     compress: true,
     lazy: true,
     publicPath: '/',
