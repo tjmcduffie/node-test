@@ -22,11 +22,12 @@ class ErrorNotFoundRoute extends BaseHtmlRoute {
 
   constructor(req: $Request, res: $Response): void {
     super(req, res);
+    this.setPageComponent(ErrorNotFoundPage);
     this.setPageTitle('Error, page not found');
   }
 
   setDesktopResponse(data: {}): ReactElement<*> {
-    return React.createElement(ErrorNotFoundPage, data);
+    return React.createElement(this.getPageComponent(), data);
   }
 }
 

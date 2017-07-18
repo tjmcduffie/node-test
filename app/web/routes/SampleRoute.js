@@ -22,11 +22,12 @@ class SampleRoute extends BaseHtmlRoute {
 
   constructor(req: $Request, res: $Response): void {
     super(req, res);
+    this.setPageComponent(SamplePage);
     this.setPageTitle('Sample');
   }
 
   setDesktopResponse(data: {}): ReactElement<*> {
-    return React.createElement(SamplePage, data);
+    return React.createElement(this.getPageComponent(), data);
   }
 }
 

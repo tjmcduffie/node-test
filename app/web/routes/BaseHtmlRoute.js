@@ -16,6 +16,7 @@ const React = require('react');
 class BaseHtmlRoute {
   _container: ReactClass<*>;
   _layoutView: string;
+  _pageComponent: ReactClass<*>;
   _pageTitle: string;
   _req: $Request;
   _res: $Response;
@@ -42,6 +43,14 @@ class BaseHtmlRoute {
 
   setLayoutView(view: string): void {
     this._layoutView = view;
+  }
+
+  getPageComponent(): ReactClass<*> {
+    return this._pageComponent;
+  }
+
+  setPageComponent(component: ReactClass<*>): void {
+    this._pageComponent = component;
   }
 
   getPageTitle(): string {
@@ -72,21 +81,22 @@ class BaseHtmlRoute {
     try {
       this.genData()
         .then((pageData: Object): void => {
-          const containerData = {
-            pageData,
-            pageContent,
-          };
           pageContent = this.setDesktopResponse(pageData);
           pageContainer = React.createElement(
             this.getContainer(),
-            containerData
+            {
+              pageData,
+              children: pageContent,
+            },
           );
 
           this._res
             .render(this.getLayoutView(), {
               title: this.getPageTitle(),
               children: pageContainer,
-              initialData: pageData,
+              initialData: JSON.stringify({
+                [this.getPageComponent().name]: pageData,
+              }, null, 2),
             });
         });
     } catch (e) {

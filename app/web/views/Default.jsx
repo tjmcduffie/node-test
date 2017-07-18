@@ -13,7 +13,9 @@ const React = require('react');
 module.exports = function Default(props: {
   children?: Array<ReactElement<*>> | ReactElement<*>,
   title: string,
+  initialData: string,
 }): ReactElement<*> {
+  const initialdataJSON = `const initialData = ${props.initialData}`;
   return (
     <html>
       <head>
@@ -31,6 +33,7 @@ module.exports = function Default(props: {
       </head>
       <body>
         {props.children}
+        <script dangerouslySetInnerHTML={{__html: initialdataJSON}} />
         <script src="/js/inline.bundle.js"></script>
         <script src="/js/header.bundle.js"></script>
         <script src="/js/content.bundle.js"></script>
