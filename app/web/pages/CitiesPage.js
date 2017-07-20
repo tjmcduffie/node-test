@@ -22,7 +22,7 @@ const CitiesPage = (props: CitiesData): ReactElement<*> => {
         <ul>
           {cities.map(city => {
             return (
-              <li>
+              <li key={city._id}>
                 <b>{city.name}, {city.state}</b> suggested by {city.suggestedBy}
               </li>
             );

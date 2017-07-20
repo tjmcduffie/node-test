@@ -6,57 +6,37 @@
 
 "use strict";
 
-import type {InternalRouteType, InternalRouteListType} from '~/app/lib/InternalRouteType';
-import type {Element as ReactElement} from 'react';
+import type {InternalRouteListType} from '~/app/lib/InternalRouteType';
+import type {pageRenderer} from '~/app/lib/util/renderpage';
 
-const React = require('react');
-// will generate this eventually...
-// route.key || route.name.substr(1).replace('/', '-')
+const renderPage = require('~/app/lib/util/renderPage');
 
-module.exports = [
+const routes: InternalRouteListType = [
   {
-    key: 'sample',
-    name: 'Sample',
+    name: 'SampleRoute',
+    method: 'get',
     path: '/',
-    route: '/',
-    action: (): ReactElement<*> => {
+    action: (params: Object, query: Object): pageRenderer => {
       const SamplePage = require('~/app/web/pages/SamplePage');
-      return (
-        <SamplePage />
-      );
+      return renderPage(SamplePage)(params, query);
     },
   },{
-    key: 'cities',
-    name: 'Cities',
-    path: '/cities/',
-    route: '/cities/:page',
-    action: (): ReactElement<*> => {
+    name: 'CitiesRoute',
+    method: 'get',
+    path: '/cities/:page?',
+    action: (params: Object, query: Object): pageRenderer => {
       const CitiesPage = require('~/app/web/pages/CitiesPage');
-      return (
-        <CitiesPage />
-      );
+      return renderPage(CitiesPage)(params, query);
     },
   },{
-    key: 'city',
-    name: 'City',
-    path: '/city/',
-    route: '/city/:state/:cityname',
-    action: (): ReactElement<*> => {
+    name: 'CityRoute',
+    method: 'get',
+    path: '/city/:state/:cityname',
+    action: (params: Object, query: Object): pageRenderer => {
       const CityPage = require('~/app/web/pages/CityPage');
-      return (
-        <CityPage />
-      );
-    },
-  },{
-    key: 'not-found',
-    name: 'ErrorNotFound',
-    path: '/*',
-    route: '/*',
-    action: (): ReactElement<*> => {
-      const ErrorNotFoundPage = require('~/app/web/pages/ErrorNotFoundPage');
-      return (
-        <ErrorNotFoundPage />
-      );
+      return renderPage(CityPage)(params, query);
     },
   },
-]
+];
+
+module.exports = routes;

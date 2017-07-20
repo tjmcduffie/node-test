@@ -35,7 +35,7 @@ class MainNav extends React.PureComponent {
             return (
               <li
                 className={styles.item}
-                key={route.key}
+                key={route.name}
               >
                 <Button
                   href={route.path}

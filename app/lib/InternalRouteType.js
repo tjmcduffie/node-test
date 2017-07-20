@@ -6,14 +6,13 @@
 
 "use strict";
 
-import type {Element as ReactElement} from 'react';
+import type {pageRenderer} from '~/app/lib/util/renderpage';
 
 export type InternalRouteType = {
-  action: () => ReactElement<*>,
-  key: string,
+  action: (params: Object, query: Object) => pageRenderer,
   name: string,
   path: string,
-  route: string,
+  method: 'get',
 };
 
 export type InternalRouteListType = Array<InternalRouteType>;

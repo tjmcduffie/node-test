@@ -7,14 +7,17 @@
 "use strict";
 
 import type {BrowserHistory} from '~/app/lib/util/browserHistory';
-import type {InternalRouteListType} from '~/app/lib/InternalRouteType';
 import type {Element as ReactElement} from 'react';
 
 const BaseError = require('~/app/lib/BaseError');
 const browserHistory = require('~/app/lib/util/browserHistory')();
 const AllRoutes = require('~/app/web/generated/AllRoutes');
-const pathToRegex = require('path-to-regexp');
+const ErrorNotFoundPage = require('~/app/web/pages/ErrorNotFoundPage');
+const Error500Page = require('~/app/web/pages/Error500Page');
 const React = require('react');
+const Router = require('routr');
+
+const cx = require('classNames');
 
 class ContentRouterError extends BaseError {
   status: ?number;
@@ -22,9 +25,11 @@ class ContentRouterError extends BaseError {
 
 class ContentRouter extends React.Component {
   state: {
+    isLoading: boolean,
     page: ReactElement<*>,
   };
   _history: ?BrowserHistory;
+  _router: Router;
   _unlistenToHistory: ?() => void;
 
   constructor() {
@@ -33,65 +38,63 @@ class ContentRouter extends React.Component {
       throw new ContentRouterError('history object is unavailable');
     }
     this._history = browserHistory;
+    this._router = new Router(AllRoutes);
     this._unlistenToHistory = this._history.listen(this._handleHistoryChange);
     this.state = {
-      page: this._routeUriToPage(browserHistory.location),
+      isLoading: false,
+      page: this._resolve(browserHistory.location),
     };
   }
 
-  _routeUriToPage = (location: Location): ReactElement<*> => {
-    return this._resolve(AllRoutes, location);
+  _handleHistoryChange = (uri: Location): void => {
+    this.setState({page: this._resolve(uri)});
   };
-
-  _handleHistoryChange = (location: Location): void => {
-    const page = this._routeUriToPage(location);
-    this.setState({page});
-  };
-
-  _matchURI(path: string, uri: string): ?Object {
-    const keys = [];
-    const pattern = pathToRegex(path, keys);
-    const match = pattern.exec(uri);
-    if (!match) {
-      return null;
-    }
-    const params = Object.create(null);
-    for (let i = 1; i < match.length; i++) {
-      params[keys[i - 1].name] =
-        match[i] !== undefined ? match[i] : undefined;
-    }
-    return params;
-  }
 
   _resolve(
-    routes: InternalRouteListType,
-    context: Location,
+    uri: Location,
   ): ReactElement<*> {
-    let result;
-    for (const route of routes) {
-      const uri = context.error ? '/error' : context.pathname;
-      const params = this._matchURI(route.path, uri);
-      if (!params) {
-        continue;
-      }
+    const route = this._router.getRoute(uri.pathname);
+    let page;
 
-      result = route.action({context, params});
-      if (result) {
-        break;
+    if (route) {
+      const {config: {action}} = route
+      try {
+        page = action(route.params, route.query);
+      } catch (e) {
+        if (e instanceof ContentRouterError) {
+          page = <ErrorNotFoundPage />;
+        } else {
+          page = <Error500Page />;
+        }
+        console.error(e);
       }
-    }
-
-    if (!result) {
+    } else {
       const error = new ContentRouterError('Not found');
       error.status = 404;
-      throw error;
+      page = <ErrorNotFoundPage />;
     }
-    return result;
+
+    return page;
   }
 
   render(): ReactElement<*> {
-    const {page} = this.state;
-    return page;
+    const {
+      isLoading,
+      page,
+    } = this.state;
+    return (
+      <div
+        className={cx({
+          'isLoading': isLoading,
+          'loadingComplete': !isLoading,
+        })}
+      >
+        {page}
+        <div className={cx('screen')}>
+          <div className={cx('loader')} />
+        </div>
+      </div>
+    );
   }
 }
 

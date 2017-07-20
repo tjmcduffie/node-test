@@ -52,11 +52,11 @@
     "morgan": "^1.8.2",
     "node-uuid": "^1.4.8",
     "parallelshell": "^2.0.0",
-    "path-to-regexp": "^1.7.0",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-router-dom": "^4.1.1",
     "rotating-file-stream": "^1.2.2",
+    "routr": "^2.1.0",
     "wavy": "^1.0.4"
   },
   "devDependencies": {

@@ -6,35 +6,31 @@
 
 "use strict";
 
-import type {InternalRouteType, InternalRouteListType} from '~/app/lib/InternalRouteType';
-import type {Element as ReactElement} from 'react';
+import type {InternalRouteListType} from '~/app/lib/InternalRouteType';
+import type {pageRenderer} from '~/app/lib/util/renderpage';
 
-const React = require('react');
-// will generate this eventually...
-// route.key || route.name.substr(1).replace('/', '-')
+const renderPage = require('~/app/lib/util/renderPage');
 
-module.exports = [
+const routes: InternalRouteListType = [
   {
-    key: 'sample',
-    name: 'Sample',
+    displayName: 'sample',
+    name: 'SampleRoute',
+    method: 'get',
     path: '/',
-    route: '/',
-    action: (): ReactElement<*> => {
+    action: (params: Object, query: Object): pageRenderer => {
       const SamplePage = require('~/app/web/pages/SamplePage');
-      return (
-        <SamplePage />
-      );
+      return renderPage(SamplePage)(params, query);
     },
   },{
-    key: 'cities',
-    name: 'Cities',
-    path: '/cities/',
-    route: '/cities/:page',
-    action: (): ReactElement<*> => {
+    displayName: 'cities',
+    name: 'CitiesRoute',
+    method: 'get',
+    path: '/cities/:page?',
+    action: (params: Object, query: Object): pageRenderer => {
       const CitiesPage = require('~/app/web/pages/CitiesPage');
-      return (
-        <CitiesPage />
-      );
+      return renderPage(CitiesPage)(params, query);
     },
   },
-]
+];
+
+module.exports = routes;

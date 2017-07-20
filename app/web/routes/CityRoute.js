@@ -10,6 +10,7 @@ import type {$Request, $Response} from 'express';
 import type {Element as ReactElement} from 'react';
 
 export type CityType = {
+  _id: string,
   name: string,
   state: string,
   suggestedBy: 'Tim' | 'Kristine',
