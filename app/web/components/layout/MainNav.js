@@ -8,16 +8,31 @@
 
 import type {Element as ReactElement} from 'react';
 
+type NavLink = {
+  name: string,
+  path: string,
+};
+
 type Props = {
   className?: string,
 }
 
 const Button = require('~/app/web/components/global/Button');
-const NavRoutes = require('~/app/web/generated/NavRoutes');
 const React = require('react');
+const router = require('~/app/web/routes/Router');
 
 const cx = require('classNames');
 const styles = require('~/app/static_src/css/MainNav.css');
+
+const navLinks: Array<NavLink> = [
+  {
+    name: 'Sample',
+    path: router.makePath('SampleRoute'),
+  }, {
+    name: 'Cities',
+    path: router.makePath('CitiesRoute', {page: 0}),
+  },
+];
 
 class MainNav extends React.PureComponent {
   props: Props;
@@ -31,15 +46,14 @@ class MainNav extends React.PureComponent {
         )}
       >
         <ul className={styles.list}>
-          {NavRoutes.map(route => {
+          {navLinks.map((route, index) => {
             return (
               <li
                 className={styles.item}
-                key={route.name}
+                key={index}
               >
                 <Button
                   href={route.path}
-                  route={route}
                   theme={Button.theme.GREEN}
                 >
                   {route.name}

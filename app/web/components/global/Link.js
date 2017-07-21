@@ -7,7 +7,6 @@
 "use strict";
 
 import type {BrowserHistory} from '~/app/lib/util/browserHistory';
-import type {InternalRouteType} from '~/app/lib/InternalRouteType';
 import type {Element as ReactElement} from 'react';
 
 const BaseError = require('~/app/lib/BaseError');
@@ -25,7 +24,6 @@ class Link extends React.PureComponent {
     href: string,
     isExternal?: boolean,
     onClick?: (e: Event) => void,
-    route?: InternalRouteType,
   }
 
   constructor(props: *) {

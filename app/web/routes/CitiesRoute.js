@@ -19,7 +19,7 @@ const CitiesPage = require('~/app/web/pages/CitiesPage');
 const City = require('~/app/lib/models/City');
 const React = require('react');
 
-const CitiesRoutePath: string = '/cities/:page*?';
+const CitiesRoutePath: string = '/cities/:page?';
 const CITIES_COUNT = 25;
 
 class CitiesRoute extends BaseHtmlRoute {

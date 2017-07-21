@@ -15,7 +15,7 @@ module.exports = function Default(props: {
   title: string,
   initialData: string,
 }): ReactElement<*> {
-  const initialdataJSON = `const initialData = ${props.initialData}`;
+  const initialdataJSON = `window.__initialData__ = ${props.initialData}`;
   return (
     <html>
       <head>
