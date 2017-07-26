@@ -18,6 +18,7 @@ const BaseHtmlRoute = require('~/app/web/routes/BaseHtmlRoute');
 const CitiesPage = require('~/app/web/pages/CitiesPage');
 const City = require('~/app/lib/models/City');
 const React = require('react');
+const {NotFoundError, SystemError} = require('~/app/lib/ServerErrors');
 
 const CitiesRoutePath: string = '/cities/:page?';
 const CITIES_COUNT = 25;
@@ -35,15 +36,21 @@ class CitiesRoute extends BaseHtmlRoute {
 
   genData(): Promise<CitiesData> {
     const {page: pageParam} = this._req.params;
-    const page = typeof pageParam === 'number' ? pageParam - 1 : 0;
+    const page = parseInt(pageParam, 10) || 0;
     const skip = CITIES_COUNT * page;
     return new Promise((resolve, reject) => {
       const conditions = {};
       const fields = null;
-      const options = {skip};
+      const options = {
+        limit: CITIES_COUNT,
+        skip,
+      };
       City.find(conditions, fields, options, (err, docs) => {
         if (err) {
-          reject(err);
+          reject(new SystemError(err));
+        }
+        if (docs.length < 1) {
+          reject(new NotFoundError());
         }
         resolve({
           cities: docs,
