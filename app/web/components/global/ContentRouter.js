@@ -25,6 +25,7 @@ const browserHistory = require('~/app/lib/util/browserHistory')();
 const DataCache = require('~/app/lib/util/DataCache');
 const ErrorNotFoundPage = require('~/app/web/pages/ErrorNotFoundPage');
 const Error500Page = require('~/app/web/pages/Error500Page');
+const LoadingScreen = require('~/app/web/components/global/LoadingScreen');
 const React = require('react');
 const router = require('~/app/web/routes/Router');
 const {NotFoundError} = require('~/app/lib/ServerErrors');
@@ -40,7 +41,7 @@ class ContentRouter extends React.Component {
     isLoading: boolean,
     page: ?ReactElement<*>,
   };
-  _history: ?BrowserHistory;
+  _history: BrowserHistory;
   _router: router;
   _unlistenToHistory: ?() => void;
 
@@ -53,7 +54,7 @@ class ContentRouter extends React.Component {
     this._router = router;
     this.state = {
       isLoading: false,
-      page: this._resolve(browserHistory.location, true),
+      page: (<div />),
     };
   }
 
@@ -63,36 +64,47 @@ class ContentRouter extends React.Component {
     }
   }
 
+  componentDidMount() {
+    this._resolve(this._history.location, true);
+  }
+
   componentWillUnount() {
     this._unlistenToHistory && this._unlistenToHistory();
   }
 
   _handleHistoryChange = (uri: Location): void => {
-    this._resolve(uri, false);
+    this.setState({isLoading: true});
+    this._resolve(uri);
   };
 
-  // @TODO convert this to use async/await rather than calling through to one
-  // sync and one async method.
-  _resolve(uri: Location, isInitial: boolean): ?ReactElement<*> {
+  async _resolve(
+    uri: Location,
+    isInitial?: boolean,
+  ): Promise<void> {
     const route = this._router.getRoute(uri.pathname);
-    if (route) {
-      if (isInitial) {
-        return this._resolveWithInitialData(route);
+    let page;
+    try {
+      if (route) {
+        if (isInitial) {
+          page = this._resolveWithInitialData(route);
+        } else {
+          page = await this._resolveWithAPIData(route);
+        }
       } else {
-        this._resolveWithAPIData(route);
+        const error = new ContentRouterError('Not found');
       }
-    } else {
-      const error = new ContentRouterError('Not found');
-      error.status = 404;
-      const page = (
-        <ErrorNotFoundPage />
-      );
-      if (isInitial) {
-        return page;
+    } catch (e) {
+      if (e instanceof NotFoundError) {
+        page = (<ErrorNotFoundPage />);
       } else {
-        this.setState({page});
+        page = (<Error500Page />);
       }
     }
+
+    this.setState({
+      page,
+      isLoading: false,
+    });
   }
 
   _resolveWithInitialData(route: Route): ReactElement<*> {
@@ -101,47 +113,30 @@ class ContentRouter extends React.Component {
     return <Component {...data} />;
   }
 
-  _resolveWithAPIData(route: Route): void {
-    const {
-      config: {
-        Component,
-        fetchData,
-      },
-      params,
-      query,
-    } = route;
-    // need to wrap each of the arguments here in new objects to make sure all
-    // descriptor props are set appropriately.
-    const mergedParams = Object.create(
-      Object.create(query),
-      Object.create(params),
-    );
-    this.setState(
-      {isLoading: true},
-      () => {
-        fetchData(mergedParams)
-          .then((data: Object) => {
-            this.setState({
-              isLoading: false,
-              page: (
-                <Component {...data} />
-              ),
-            });
-          })
-          .catch((e: Error) => {
-            let page;
-            if (e instanceof NotFoundError) {
-              page = <ErrorNotFoundPage />;
-            } else {
-              page = <Error500Page />;
-            }
-            this.setState({
-              isLoading: false,
-              page,
-            });
-          });
-      },
-    );
+  _resolveWithAPIData(route: Route): Promise<ReactElement<*>> {
+    return new Promise((resolve, reject) => {
+      const {
+        config: {
+          Component,
+          fetchData,
+        },
+        params,
+        query,
+      } = route;
+      // need to wrap each of the arguments here in new objects to make sure all
+      // descriptor props are set appropriately.
+      const mergedParams = Object.create(
+        Object.create(query),
+        Object.create(params),
+      );
+      fetchData(mergedParams)
+        .then((data: Object) => {
+          resolve((<Component {...data} />));
+        })
+        .catch((e: Error) => {
+          reject(e);
+        });
+    });
   }
 
   render(): ReactElement<*> {
@@ -150,16 +145,9 @@ class ContentRouter extends React.Component {
       page,
     } = this.state;
     return (
-      <div
-        className={cx({
-          'isLoading': isLoading,
-          'loadingComplete': !isLoading,
-        })}
-      >
+      <div>
         {page}
-        <div className={cx('screen')}>
-          <div className={cx('loader')} />
-        </div>
+        <LoadingScreen isVisible={isLoading} />
       </div>
     );
   }
