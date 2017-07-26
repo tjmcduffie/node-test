@@ -31,9 +31,10 @@ module.exports = {
               'flow',
             ],
             plugins: [
+              ["transform-async-to-generator"],
+              ["transform-class-properties", {}],
               ["transform-object-rest-spread"],
               ["transform-strict-mode", { "strict": true }],
-              ["transform-class-properties", {}],
             ]
           },
         },
