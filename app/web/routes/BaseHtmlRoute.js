@@ -12,6 +12,7 @@ import type {Element as ReactElement} from 'react';
 const BaseError = require('~/app/lib/BaseError');
 const DefaultContainer = require('~/app/web/components/layout/DefaultContainer');
 const React = require('react');
+const {NotFoundError} = require('~/app/lib/ServerErrors');
 
 class BaseHtmlRoute {
   _container: ReactClass<*>;
@@ -74,33 +75,31 @@ class BaseHtmlRoute {
     });
   }
 
-  get(): void {
-    let pageContainer: ?ReactElement<*>;
-    let pageContent: ?Array<ReactElement<*>>|ReactElement<*>;
-
+  async get(): Promise<*> {
     try {
-      this.genData()
-        .then((pageData: Object): void => {
-          pageContent = this.setDesktopResponse(pageData);
-          pageContainer = React.createElement(
-            this.getContainer(),
-            {
-              pageData,
-              children: pageContent,
-            },
-          );
-
-          this._res
-            .render(this.getLayoutView(), {
-              title: this.getPageTitle(),
-              children: pageContainer,
-              initialData: JSON.stringify({
-                [this.getPageComponent().name]: pageData,
-              }, null, 2),
-            });
-        });
+      const pageData = await this.genData();
+      const pageContent: ?Array<ReactElement<*>>|ReactElement<*> =
+        this.setDesktopResponse(pageData);
+      const pageContainer: ?ReactElement<*> = React.createElement(
+        this.getContainer(),
+        {
+          pageData,
+          children: pageContent,
+        },
+      );
+      this._res
+        .render(
+          this.getLayoutView(),
+          {
+            title: this.getPageTitle(),
+            children: pageContainer,
+            initialData: JSON.stringify({
+              [this.getPageComponent().name]: pageData,
+            }, null, 2),
+          },
+        );
     } catch (e) {
-      this._res.sendStatus(500);
+      this._res.sendStatus(e.status || 500);
       throw e;
     }
   }
