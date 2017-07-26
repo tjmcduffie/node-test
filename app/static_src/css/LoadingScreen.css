@@ -1,0 +1,117 @@
+/**
+ * LOADING_SCREEN
+ */
+.root {
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.75);
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 100;
+}
+
+.root.isLoadingComplete {
+  display: none;
+}
+
+.progress {
+  background-color: #e8e8e8;
+  border-radius: 2px;
+  display: block;
+  height: 6px;
+  margin: 0.5rem 0 1rem 0;
+  overflow: hidden;
+  position: relative;
+  width: 50%;
+}
+
+.progress .indeterminate {
+  background-color: #1fe7a8;
+}
+
+.progress .indeterminate:before {
+  animation: indeterminate 2.5s cubic-bezier(0.65, 0.815, 0.735, 0.395) infinite;
+  background-color: inherit;
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  top: 0;
+  will-change: left, right;
+}
+
+.progress .indeterminate:after {
+  animation: indeterminate-short 2.5s cubic-bezier(0.165, 0.84, 0.44, 1) infinite;
+  animation-delay: 1.55s;
+  background-color: inherit;
+  bottom: 0;
+  content: '';
+  left: 0;
+  position: absolute;
+  top: 0;
+  will-change: left, right;
+}
+
+@-webkit-keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+@keyframes indeterminate {
+  0% {
+    left: -35%;
+    right: 100%;
+  }
+  60% {
+    left: 100%;
+    right: -90%;
+  }
+  100% {
+    left: 100%;
+    right: -90%;
+  }
+}
+
+@-webkit-keyframes indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
+
+@keyframes indeterminate-short {
+  0% {
+    left: -200%;
+    right: 100%;
+  }
+  60% {
+    left: 107%;
+    right: -8%;
+  }
+  100% {
+    left: 107%;
+    right: -8%;
+  }
+}
