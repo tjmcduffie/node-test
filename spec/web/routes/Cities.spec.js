@@ -6,7 +6,7 @@ const CitiesRoute = require('~/app/web/routes/CitiesRoute')
 
 const PORT = 3001;
 const PATH = CitiesRoute.getPath()
-  .replace(':page','1');
+  .replace(':page','0');
 const uri = `http://localhost:${PORT}${PATH}`;
 
 describe('The Cities page', () => {
