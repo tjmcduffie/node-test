@@ -4,9 +4,9 @@ const server = require('~/app/server');
 const request = require('superagent');
 
 const PORT = 3001;
-const uri = `http://localhost:${PORT}/api/test`;
+const uri = `http://localhost:${PORT}/api/sample`;
 
-describe('TestRoute', () => {
+describe('SampleRoute', () => {
   let app
 
   afterEach(() => {
@@ -23,7 +23,7 @@ describe('TestRoute', () => {
       .accept('json')
       .end(function(err, res) {
         expect(err).toBeNull();
-        expect(res.body).toEqual({data: 'test:delete', error: null});
+        expect(res.body).toEqual({data: 'sample:delete', error: null});
         done();
       });
   });
@@ -33,7 +33,7 @@ describe('TestRoute', () => {
         .get(uri)
         .end(function(err, res) {
           expect(err).toBeNull();
-          expect(res.body).toEqual({data: "test:get:2.2.1", error: null});
+          expect(res.body).toEqual({data: "sample:get:2.2.1", error: null});
           done();
         });
     });
@@ -43,7 +43,7 @@ describe('TestRoute', () => {
         .set('accept-version', '1.0.0')
         .end(function(err, res) {
           expect(err).toBeNull();
-          expect(res.body).toEqual({"data": "test:get:1.0.0", error: null});
+          expect(res.body).toEqual({"data": "sample:get:1.0.0", error: null});
           done();
         });
     });
@@ -53,7 +53,7 @@ describe('TestRoute', () => {
         .set('accept-version', '3.0.0')
         .end(function(err, res) {
           expect(err).toBeNull();
-          expect(res.body).toEqual({"data": "test:get:2.2.1", error: null});
+          expect(res.body).toEqual({"data": "sample:get:2.2.1", error: null});
           done();
         });
     });
@@ -64,7 +64,7 @@ describe('TestRoute', () => {
       .accept('json')
       .end(function(err, res) {
         expect(err).toBeNull();
-        expect(res.body).toEqual({"data": "test:post", "error": null});
+        expect(res.body).toEqual({"data": "sample:post", "error": null});
         done();
       });
   });
@@ -76,7 +76,7 @@ describe('TestRoute', () => {
         expect(err.status).toBe(500);
         expect(res.body.data).toEqual({});
         expect(typeof res.body.error.name).toBe('string');
-        expect(res.body.error.message).toBe('test:put:error');
+        expect(res.body.error.message).toBe('sample:put:error');
         done();
       });
   });
