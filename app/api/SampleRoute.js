@@ -1,6 +1,6 @@
 /*global */
 /**
- * 
+ *
  * //flow
  */
 
@@ -14,45 +14,61 @@ const routesVersioning = expressRouteVersioning();
 
 class TestRoute extends BaseJsonApiRoute {
   static getPath() {
-    return '/test/?';
+    return '/sample/?';
   }
 
-  delete() {
-    super.setResponseContent(() => {
-      return "test:delete";
-    });
+  constructor(req: $Request, res: $Response, next: NextFunction): void {
+    super(req, res, next);
+    this.setVesions(new Map([
+      ['DELETE', {'1.0.0': () => this.delete_v1_0_0()}],
+      ['GET', {
+        '1.0.0': () => this.get_v1_0_0(),
+        '~2.2.1': () => this.get_v2_2_1(),
+      }],
+      ['POST', {'1.0.0': () => this.post_v1_0_0()}],
+      ['PUT', {'1.0.0': () => this.put_v1_0_0()}],
+    ]));
   }
 
-  get() {
-    const versioner = routesVersioning({
-      "1.0.0": () => this.get1_0_0(),
-      "~2.2.1": () => this.get2_2_1(),
-    });
-    versioner(this._req);
+  async delete_v1_0_0() {
+    this._genResponse(() =>
+      new Promise((resolve, reject) => {
+        resolve("sample:delete");
+      })
+    );
   }
 
-  get1_0_0() {
-    super.setResponseContent(() => {
-      return "test:get:1.0.0";
-    });
+  get_v1_0_0() {
+    this._genResponse(() =>
+      new Promise((resolve, reject) => {
+        resolve("sample:get:1.0.0");
+      })
+    );
   }
 
-  get2_2_1() {
-    super.setResponseContent(() => {
-      return "test:get:2.2.1";
-    });
+  get_v2_2_1() {
+    this._genResponse(() =>
+      new Promise((resolve, reject) => {
+        resolve("sample:get:2.2.1");
+      })
+    );
   }
 
-  post() {
-    super.setResponseContent(() => {
-      return "test:post";
-    });
+  post_v1_0_0() {
+    this._genResponse(() =>
+      new Promise((resolve, reject) => {
+        resolve("sample:post");
+      })
+    );
   }
-
-  put() {
-    super.setResponseContent(() => {
-      throw new TestRouteError('test:put:error');
-    });
+  put_v1_0_0() {
+    this._genResponse(() =>
+      new Promise((resolve, reject) => {
+        const e = new TestRouteError('sample:put:error');
+        e.status = 500;
+        reject(e);
+      })
+    );
   }
 }
 

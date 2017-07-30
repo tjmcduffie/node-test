@@ -20,7 +20,7 @@ describe('SampleRoute', () => {
   it('should handle delete requests', done => {
     request
       .delete(uri)
-      .accept('json')
+      .set('accept-version', '1.0.0')
       .end(function(err, res) {
         expect(err).toBeNull();
         expect(res.body).toEqual({data: 'sample:delete', error: null});
