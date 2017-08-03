@@ -6,13 +6,9 @@
 
 "use strict";
 
-import type {CityType} from '~/app/web/routes/CityRoute';
+import type {CitiesData} from '~/app/lib/models/City';
 import type {$Request, $Response} from 'express';
 import type {Element as ReactElement} from 'react';
-
-export type CitiesData = {
-  cities: Array<CityType>,
-};
 
 const BaseHtmlRoute = require('~/app/web/routes/BaseHtmlRoute');
 const CitiesPage = require('~/app/web/pages/CitiesPage');

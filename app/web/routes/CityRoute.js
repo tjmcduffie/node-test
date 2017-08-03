@@ -6,20 +6,10 @@
 
 "use strict";
 
+import type {CityType} from '~/app/lib/models/City';
 import type {$Request, $Response} from 'express';
 import type {Element as ReactElement} from 'react';
 
-export type CityType = {
-  _id: string,
-  name: string,
-  state: string,
-  suggestedBy: 'Tim' | 'Kristine',
-  updated: string,
-}
-
-export type CityData = {
-  city: CityType,
-};
 
 const BaseHtmlRoute = require('~/app/web/routes/BaseHtmlRoute');
 const City = require('~/app/lib/models/City');

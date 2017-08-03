@@ -23,7 +23,12 @@ describe('SampleRoute', () => {
       .set('accept-version', '1.0.0')
       .end(function(err, res) {
         expect(err).toBeNull();
-        expect(res.body).toEqual({data: 'sample:delete', error: null});
+        expect(res.body).toEqual({
+          data: {
+            message: 'sample:delete',
+          },
+          error: null,
+        });
         done();
       });
   });
@@ -33,7 +38,12 @@ describe('SampleRoute', () => {
         .get(uri)
         .end(function(err, res) {
           expect(err).toBeNull();
-          expect(res.body).toEqual({data: "sample:get:2.2.1", error: null});
+          expect(res.body).toEqual({
+            data: {
+              message: "sample:get:2.2.1",
+            },
+            error: null,
+          });
           done();
         });
     });
@@ -43,7 +53,12 @@ describe('SampleRoute', () => {
         .set('accept-version', '1.0.0')
         .end(function(err, res) {
           expect(err).toBeNull();
-          expect(res.body).toEqual({"data": "sample:get:1.0.0", error: null});
+          expect(res.body).toEqual({
+            data: {
+              message: "sample:get:1.0.0",
+            },
+            error: null,
+          });
           done();
         });
     });
@@ -53,7 +68,12 @@ describe('SampleRoute', () => {
         .set('accept-version', '3.0.0')
         .end(function(err, res) {
           expect(err).toBeNull();
-          expect(res.body).toEqual({"data": "sample:get:2.2.1", error: null});
+          expect(res.body).toEqual({
+            data: {
+              message: "sample:get:2.2.1",
+            },
+            error: null,
+          });
           done();
         });
     });
@@ -64,7 +84,12 @@ describe('SampleRoute', () => {
       .accept('json')
       .end(function(err, res) {
         expect(err).toBeNull();
-        expect(res.body).toEqual({"data": "sample:post", "error": null});
+        expect(res.body).toEqual({
+          data: {
+            message: "sample:post",
+          },
+          error: null,
+        });
         done();
       });
   });

@@ -6,7 +6,7 @@
 
 "use strict";
 
-import type {CitiesData} from '~/app/web/routes/CitiesRoute';
+import type {CitiesData} from '~/app/lib/models/City';
 import type {Element as ReactElement} from 'react';
 
 export type CitiesRouteParamsType = {

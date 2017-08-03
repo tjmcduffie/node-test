@@ -7,7 +7,8 @@
 "use strict";
 
 const express = require('express');
-const SampleRoute = require('~/app/api/SampleRoute');
+const CitiesRoute = require('~/app/api/routes/CitiesRoute');
+const SampleRoute = require('~/app/api/routes/SampleRoute');
 
 const router = express.Router();
 const ROUTE_PREFIX = '/api';
@@ -16,6 +17,7 @@ const ROUTE_PREFIX = '/api';
 
 // routes
 [
+  CitiesRoute,
   SampleRoute,
 ].forEach(Route => {
   router.route(Route.getPath())

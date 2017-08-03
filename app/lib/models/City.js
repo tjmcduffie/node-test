@@ -6,6 +6,22 @@
 
 "use strict";
 
+export type CityType = {
+  _id: string,
+  name: string,
+  state: string,
+  suggestedBy: 'Tim' | 'Kristine',
+  updated: string,
+}
+
+export type CityData = {
+  city: CityType,
+};
+
+export type CitiesData = {
+  cities: Array<CityType>,
+};
+
 const mongoose = require('mongoose');
 
 const CitySchema = new mongoose.Schema({
