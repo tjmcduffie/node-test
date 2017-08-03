@@ -67,7 +67,6 @@ class BaseJsonApiRoute {
       error: null,
     };
     let status = 200;
-    // this._res.status(500); return;
     try {
       responseData.data = await genData();
     } catch (e) {
