@@ -12,7 +12,6 @@ import type {Element as ReactElement} from 'react';
 const BaseError = require('~/app/lib/BaseError');
 const DefaultContainer = require('~/app/web/components/layout/DefaultContainer');
 const React = require('react');
-const {NotFoundError} = require('~/app/lib/ServerErrors');
 
 class BaseHtmlRoute {
   _container: ReactClass<*>;
