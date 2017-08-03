@@ -30,8 +30,6 @@ const React = require('react');
 const router = require('~/app/web/routes/Router');
 const {NotFoundError} = require('~/app/lib/ServerErrors');
 
-const cx = require('classNames');
-
 class ContentRouterError extends BaseError {
   status: ?number;
 }
@@ -91,7 +89,7 @@ class ContentRouter extends React.Component {
           page = await this._resolveWithAPIData(route);
         }
       } else {
-        const error = new ContentRouterError('Not found');
+        throw new NotFoundError();
       }
     } catch (e) {
       if (e instanceof NotFoundError) {
