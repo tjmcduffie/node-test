@@ -11,11 +11,7 @@ import type {RouteMethodTypes} from '~/app/lib/InternalRouteType';
 
 export type MethodVersionHash = {[string]: Function};
 
-const BaseError = require('~/app/lib/BaseError');
 const setVersions = require('express-routes-versioning')();
-const {NotFoundError} = require('~/app/lib/ServerErrors');
-
-class BaseJsonApiRouteError extends BaseError {}
 
 class BaseJsonApiRoute {
   _next: NextFunction;
