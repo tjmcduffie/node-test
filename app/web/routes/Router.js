@@ -6,7 +6,7 @@
 
 "use strict";
 
-const AllRoutes = require('~/app/generated/webRoutes');
+const WebRoutes = require('~/app/generated/WebRoutes');
 const Routr = require('routr');
 
-module.exports = new Routr(AllRoutes);
+module.exports = new Routr(WebRoutes);

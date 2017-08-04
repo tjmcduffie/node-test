@@ -7,14 +7,14 @@
 "use strict";
 
 import type {BrowserHistory} from '~/app/lib/util/browserHistory';
-import type {InternalRouteType} from '~/app/lib/InternalRouteType';
+import type {WebRouteType} from '~/app/lib/InternalRouteType';
 import type {Element as ReactElement} from 'react';
 
 type Route = {
   name: string,
   config: {
     path: string,
-  } & InternalRouteType,
+  } & WebRouteType,
   options: Object,
   params: Object,
   query: Object,
@@ -128,12 +128,8 @@ class ContentRouter extends React.Component {
         Object.create(params),
       );
       fetchData(mergedParams)
-        .then((data: Object) => {
-          resolve((<Component {...data} />));
-        })
-        .catch((e: Error) => {
-          reject(e);
-        });
+        .then((data: Object) => resolve((<Component {...data} />)))
+        .catch((e: Error) => reject(e));
     });
   }
 

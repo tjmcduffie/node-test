@@ -6,7 +6,7 @@
 
 "use strict";
 
-import type {InternalRouteListType} from '~/app/lib/InternalRouteType';
+import type {WebRouteListType} from '~/app/lib/InternalRouteType';
 
 const fetcherMock = (): Promise<*> => {
   return new Promise(resolve => {
@@ -14,7 +14,7 @@ const fetcherMock = (): Promise<*> => {
   });
 };
 
-const routes: InternalRouteListType = [
+const routes: WebRouteListType = [
   {
     Component: require('~/app/web/pages/SamplePage'),
     fetchData: fetcherMock,
