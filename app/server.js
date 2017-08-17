@@ -69,9 +69,7 @@ app.use(helmet());
 // HELMET FOR SECURITY
 
 // view engines
-const viewExtension = !(ENV === EnvEnum.DEV || ENV === EnvEnum.TEST)
-  ? 'js'
-  : 'jsx';
+const viewExtension = 'jsx';
 app.set('views', __dirname + '/web/views');
 app.set('view engine', viewExtension);
 app.engine(viewExtension, createReactViewsEngine({
