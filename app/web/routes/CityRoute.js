@@ -6,7 +6,7 @@
 
 "use strict";
 
-import type {CityType} from '~/app/lib/models/City';
+import type {CityData} from '~/app/lib/models/City';
 import type {$Request, $Response} from 'express';
 import type {Element as ReactElement} from 'react';
 
@@ -35,20 +35,20 @@ class CityRoute extends BaseHtmlRoute {
       state,
     } = this._req.params;
     return new Promise((resolve, reject) => {
-      const conditions = {
-        city: cityname,
-        state,
-      };
       const fields = null;
       const options = null;
-      City.findOne(conditions, fields, options, (err, doc) => {
-        if (err) {
-          reject(err);
+      City.findOneByCityAndState(
+        cityname,
+        state,
+        fields,
+        options,
+        (err, doc) => {
+          if (err) {
+            reject(err);
+          }
+          resolve({city: doc});
         }
-        resolve({
-          city: doc,
-        });
-      });
+      );
     });
   }
 

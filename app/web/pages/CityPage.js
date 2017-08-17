@@ -6,9 +6,16 @@
 
 "use strict";
 
-import type {CityData} from '~/app/web/routes/CityRoute';
+import type {CityData} from '~/app/lib/models/City';
 import type {Element as ReactElement} from 'react';
 
+export type CityRouteParamsType = {
+  cityname: string,
+  state: string,
+};
+
+const apiRouter = require('~/app/api/routes/Router');
+const AsyncRequest = require('~/app/lib/util/AsyncRequest');
 const Block = require('~/app/web/components/global/Block');
 const Page = require('~/app/web/components/global/Page');
 const React = require('react');
@@ -26,6 +33,25 @@ const CityPage = (props: CityData): ReactElement<*> => {
       </Block>
     </Page>
   );
+}
+
+CityPage.genClientData = (
+  params: CityRouteParamsType
+): Promise<CityData> => {
+  const {
+    cityname,
+    state,
+  } = params;
+  const cityApiRoute = apiRouter.makePath('CityRoute', {
+    cityname,
+    state,
+  });
+  return new Promise((resolve, reject) => {
+    new AsyncRequest(cityApiRoute)
+      .get()
+      .then(response => resolve(response.data))
+      .catch(e => reject(e));
+  });
 }
 
 module.exports = CityPage;

@@ -25,11 +25,54 @@ export type CitiesData = {
 const mongoose = require('mongoose');
 
 const CitySchema = new mongoose.Schema({
-  name: String,
-  state: String,
+  cityState: {
+    index: true,
+    lowercase: true,
+    // required: true,
+    unique: true,
+    type: String,
+  },
+  name: {
+    alias: 'city',
+    required: true,
+    type: String,
+  },
+  state: {
+    required: true,
+    type: String,
+  },
   suggestedBy: String,
-  updated: { type: Date, default: Date.now },
+  updated: {
+    default: Date.now,
+    type: Date,
+  },
 });
+
+function formatCityState(city: string, state: string): string {
+  const formattedCity = city.replace(' ', '--').toLowerCase();
+  const formattedState = state.replace(' ', '--').toLowerCase();
+  return `${formattedState}-${formattedCity}`;
+}
+
+CitySchema.pre('save', function(next) {
+  this.cityState = formatCityState(this.name, this.state);
+  next();
+});
+
+CitySchema.statics.findOneByCityAndState = function(
+  city: string,
+  state: string,
+  fields: ?Object,
+  options: ?Object,
+  callback: (err: ?string, doc: ?Object) => void,
+) {
+  return this.findOne(
+    {cityState: formatCityState(city, state)},
+    fields,
+    options,
+    callback
+  );
+}
 
 const City = mongoose.model('City', CitySchema);
 
