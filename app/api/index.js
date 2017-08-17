@@ -7,8 +7,6 @@
 "use strict";
 
 const express = require('express');
-const CitiesRoute = require('~/app/api/routes/CitiesRoute');
-const SampleRoute = require('~/app/api/routes/SampleRoute');
 
 const router = express.Router();
 const ROUTE_PREFIX = '/api';
@@ -17,8 +15,9 @@ const ROUTE_PREFIX = '/api';
 
 // routes
 [
-  CitiesRoute,
-  SampleRoute,
+  require('~/app/api/routes/CityRoute'),
+  require('~/app/api/routes/CitiesRoute'),
+  require('~/app/api/routes/SampleRoute'),
 ].forEach(Route => {
   router.route(Route.getPath())
     .delete((req, res, next) => (new Route(req, res, next)).delete())

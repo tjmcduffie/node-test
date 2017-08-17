@@ -16,20 +16,23 @@ const fetcherMock = (): Promise<*> => {
 
 const routes: WebRouteListType = [
   {
-    Component: require('~/app/web/pages/SamplePage'),
-    fetchData: fetcherMock,
-    name: 'SampleRoute',
-    path: '/',
-  },{
     Component: require('~/app/web/pages/CitiesPage'),
     fetchData: require('~/app/web/pages/CitiesPage').genClientData,
+    method: 'get',
     name: 'CitiesRoute',
     path: '/cities/:page?',
   },{
     Component: require('~/app/web/pages/CityPage'),
-    fetchData: fetcherMock,
+    fetchData: require('~/app/web/pages/CityPage').genClientData,
+    method: 'get',
     name: 'CityRoute',
     path: '/city/:state/:cityname',
+  },{
+    Component: require('~/app/web/pages/SamplePage'),
+    fetchData: fetcherMock,
+    method: 'get',
+    name: 'SampleRoute',
+    path: '/',
   },
 ];
 
