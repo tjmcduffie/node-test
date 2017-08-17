@@ -7,7 +7,7 @@
 }
 
 @media (min-width: 860px) {
-  .root :first-child {
+  .root > :first-child {
     padding-top: 68px; /* height of nav: Header.css:.block */
   }
 }
