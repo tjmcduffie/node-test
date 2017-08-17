@@ -6,7 +6,7 @@ const path = require('path');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const webpack = require('webpack');
 
-console.log('webpack process.env.NODE_ENV', process.env.NODE_ENV);
+console.log('>>> webpack ENV', process.env.NODE_ENV);
 module.exports = {
   entry: {
     header: path.join(__dirname, 'app', 'static_src', 'js', 'AppHeader.js'),
@@ -35,7 +35,7 @@ module.exports = {
               ["transform-class-properties", {}],
               ["transform-object-rest-spread"],
               ["transform-strict-mode", { "strict": true }],
-            ]
+            ],
           },
         },
       },
@@ -47,19 +47,19 @@ module.exports = {
               loader: "css-loader",
               options: {
                 modules: true,
-                localIdentName: '[name]--[local]--[hash:base64:5]'
+                localIdentName: '[name]--[local]--[hash:base64:5]',
               },
             },
           ],
         }),
-      }
+      },
     ],
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      }
+      },
     }),
     new UglifyJsPlugin({
       beautify: process.env.NODE_ENV !== EnvEnum.DEV ? false: true,
