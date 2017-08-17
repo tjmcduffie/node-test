@@ -14,18 +14,16 @@ const ROUTE_PREFIX = '';
 // middleware
 
 // routes
-const routes = [
+[
   require('~/app/web/routes/SampleRoute'),
   require('~/app/web/routes/CitiesRoute'),
   require('~/app/web/routes/CityRoute'),
-]
-routes.forEach(Route => {
+].forEach(Route => {
   router.route(Route.getPath())
-    .get((req, res) => (new Route(req, res)).get());
+    .get((req, res, next) => (new Route(req, res, next)).get());
 });
 
 module.exports = {
   router,
   routePrefix: ROUTE_PREFIX,
-  routes,
 };
