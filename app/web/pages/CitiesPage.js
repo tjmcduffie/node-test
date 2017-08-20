@@ -13,12 +13,14 @@ export type CitiesRouteParamsType = {
   page?: number,
 };
 
-const ApiRouter = require('~/app/api/routes/Router');
+const apiRouter = require('~/app/api/routes/Router');
+const ApiCitiesURIBuilder = require('~/app/generated/routes/ApiCitiesURIBuilder');
 const AsyncRequest = require('~/app/lib/util/AsyncRequest');
 const Block = require('~/app/web/components/global/Block');
+const Link = require('~/app/web/components/global/Link');
 const Page = require('~/app/web/components/global/Page');
 const React = require('react');
-const {NotFoundError} = require('~/app/lib/ServerErrors');
+const WebCityURIBuilder = require('~/app/generated/routes/WebCityURIBuilder');
 
 const CitiesPage = (props: CitiesData): ReactElement<*> => {
   const {cities} = props;
@@ -28,9 +30,15 @@ const CitiesPage = (props: CitiesData): ReactElement<*> => {
         <p>Cities Page</p>
         <ul>
           {cities.map(city => {
+            const cityWebPath = WebCityURIBuilder
+              .setParam('state', city.state)
+              .setParam('cityname', city.name)
+              .toString()
             return (
               <li key={city._id}>
-                <b>{city.name}, {city.state}</b> suggested by {city.suggestedBy}
+                <Link href={cityWebPath}>
+                  <b>{city.name}, {city.state}</b>
+                </Link> suggested by {city.suggestedBy}
               </li>
             );
           })}
@@ -44,7 +52,9 @@ CitiesPage.genClientData = (
   params: CitiesRouteParamsType
 ): Promise<CitiesData> => {
   const page = params.page || 0;
-  const citiesApiRoute = ApiRouter.makePath('CitiesRoute', {page});
+  const citiesApiRoute = ApiCitiesURIBuilder
+    .setParam('page', page)
+    .toString()
   return new Promise((resolve, reject) => {
     new AsyncRequest(citiesApiRoute)
       .get()
