@@ -92,6 +92,7 @@ class ContentRouter extends React.Component {
         throw new NotFoundError();
       }
     } catch (e) {
+      console.error(e);
       if (e instanceof NotFoundError) {
         page = (<ErrorNotFoundPage />);
       } else {
@@ -123,10 +124,7 @@ class ContentRouter extends React.Component {
       } = route;
       // need to wrap each of the arguments here in new objects to make sure all
       // descriptor props are set appropriately.
-      const mergedParams = Object.create(
-        Object.create(query),
-        Object.create(params),
-      );
+      const mergedParams = Object.assign({}, query, params);
       fetchData(mergedParams)
         .then((data: Object) => resolve((<Component {...data} />)))
         .catch((e: Error) => reject(e));
