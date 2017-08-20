@@ -13,7 +13,7 @@ const BaseError = require('~/app/lib/BaseError');
 
 class TestRoute extends BaseJsonApiRoute {
   static getPath() {
-    return '/sample/?';
+    return '/api/sample/?';
   }
 
   constructor(req: $Request, res: $Response, next: NextFunction): void {

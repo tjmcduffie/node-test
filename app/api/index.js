@@ -9,7 +9,7 @@
 const express = require('express');
 
 const router = express.Router();
-const ROUTE_PREFIX = '/api';
+const ROUTE_PREFIX = '';
 
 // middleware
 

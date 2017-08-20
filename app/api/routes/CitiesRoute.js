@@ -17,7 +17,7 @@ const BaseJsonApiRoute = require('~/app/api/routes/BaseJsonApiRoute');
 const City = require('~/app/lib/models/City');
 const {NotFoundError, SystemError} = require('~/app/lib/ServerErrors');
 
-const CitiesRoutePath: string = '/cities/:page?';
+const CitiesRoutePath: string = '/api/cities/:page';
 const CITIES_COUNT = 25;
 
 

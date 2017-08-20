@@ -17,7 +17,7 @@ const BaseJsonApiRoute = require('~/app/api/routes/BaseJsonApiRoute');
 const City = require('~/app/lib/models/City');
 const {NotFoundError, SystemError} = require('~/app/lib/ServerErrors');
 
-const CitiesRoutePath: string = '/city/:state/:cityname';
+const CitiesRoutePath: string = '/api/city/:state/:cityname';
 
 
 class CitiesRoute extends BaseJsonApiRoute {
