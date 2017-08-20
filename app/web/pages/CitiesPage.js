@@ -13,7 +13,6 @@ export type CitiesRouteParamsType = {
   page?: number,
 };
 
-const apiRouter = require('~/app/api/routes/Router');
 const ApiCitiesURIBuilder = require('~/app/generated/routes/ApiCitiesURIBuilder');
 const AsyncRequest = require('~/app/lib/util/AsyncRequest');
 const Block = require('~/app/web/components/global/Block');

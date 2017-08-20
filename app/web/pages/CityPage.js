@@ -14,7 +14,7 @@ export type CityRouteParamsType = {
   state: string,
 };
 
-const apiRouter = require('~/app/api/routes/Router');
+const ApiCityURIBuilder = require('~/app/generated/routes/ApiCityURIBuilder');
 const AsyncRequest = require('~/app/lib/util/AsyncRequest');
 const Block = require('~/app/web/components/global/Block');
 const Page = require('~/app/web/components/global/Page');
@@ -42,10 +42,10 @@ CityPage.genClientData = (
     cityname,
     state,
   } = params;
-  const cityApiRoute = apiRouter.makePath('CityRoute', {
-    cityname,
-    state,
-  });
+  const cityApiRoute = ApiCityURIBuilder
+    .setParam('cityname', cityname)
+    .setParam('state', state)
+    .toString();
   return new Promise((resolve, reject) => {
     new AsyncRequest(cityApiRoute)
       .get()
