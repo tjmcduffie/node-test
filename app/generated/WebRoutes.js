@@ -20,7 +20,7 @@ const routes: WebRouteListType = [
     fetchData: require('~/app/web/pages/CitiesPage').genClientData,
     method: 'get',
     name: 'CitiesRoute',
-    path: '/cities/:page?',
+    path: '/cities/:page',
   },{
     Component: require('~/app/web/pages/CityPage'),
     fetchData: require('~/app/web/pages/CityPage').genClientData,
