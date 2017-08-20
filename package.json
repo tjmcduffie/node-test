@@ -99,6 +99,7 @@
     "superagent": "^3.5.2",
     "uglify-js": "git://github.com/mishoo/UglifyJS2.git#harmony-v2.8.22",
     "uglifyjs-webpack-plugin": "^0.4.3",
+    "url-pattern": "^1.0.3",
     "webpack": "^2.6.1",
     "webpack-bundle-analyzer": "^2.8.2",
     "webpack-dev-middleware": "^1.10.2",
