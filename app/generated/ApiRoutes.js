@@ -10,9 +10,9 @@ import type {ApiRouteListType} from '~/app/lib/InternalRouteType';
 
 const routes: ApiRouteListType = [
   {
-    methods: ['GET'],
-    name: 'CityRoute',
-    path: '/api/city/:state/:cityname',
+    methods: ['GET'],                   // this is squirrely right now...
+    name: 'CityRoute',                  // class ((CitiesRoute)) extends BaseHtmlRoute {
+    path: '/api/city/:state/:cityname', // const CitiesRoutePath: string = (('/cities/:page?'));
   },{
     methods: ['GET'],
     name: 'CitiesRoute',

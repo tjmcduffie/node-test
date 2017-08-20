@@ -16,11 +16,11 @@ const fetcherMock = (): Promise<*> => {
 
 const routes: WebRouteListType = [
   {
-    Component: require('~/app/web/pages/CitiesPage'),
-    fetchData: require('~/app/web/pages/CitiesPage').genClientData,
-    method: 'get',
-    name: 'CitiesRoute',
-    path: '/cities/:page',
+    Component: require('~/app/web/pages/CitiesPage'),               // const CitiesPage = ((require('~/app/web/pages/CitiesPage')));
+    fetchData: require('~/app/web/pages/CitiesPage').genClientData, // always genClientData
+    method: 'get',                                                  // web only allows get
+    name: 'CitiesRoute',                                            // class ((CitiesRoute)) extends BaseHtmlRoute {
+    path: '/cities/:page?',                                         // const CitiesRoutePath: string = (('/cities/:page?'));
   },{
     Component: require('~/app/web/pages/CityPage'),
     fetchData: require('~/app/web/pages/CityPage').genClientData,
