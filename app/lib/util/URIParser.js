@@ -1,6 +1,6 @@
 /*global */
 /**
- * 
+ *
  * @flow
  */
 
@@ -29,9 +29,9 @@ const regexp = new RegExp([
   "(:([0-9]{3,4}))?",                 // port (including colon)
   "){1}",                             // host complete
   ")?",                               // relative path
-  "(\/[a-z0-9-_\/\.]*)",              // pathname
-  "([?]{1}[a-z0-9=&-_+@]*)?",         // search
-  "(#[a-z0-9-_\.]*)?",                // hash
+  "(\/[a-z0-9-_%\/\.]*)",             // pathname
+  "([?]{1}[a-z0-9=&-_%+@]*)?",        // search
+  "(#[a-z0-9-_%\.]*)?",               // hash
   "$",                                // end url
 ].join(""), "i");
 
