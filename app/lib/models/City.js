@@ -49,9 +49,9 @@ const CitySchema = new mongoose.Schema({
 });
 
 function formatCityState(city: string, state: string): string {
-  const formattedCity = city.replace(' ', '--').toLowerCase();
-  const formattedState = state.replace(' ', '--').toLowerCase();
-  return `${formattedState}-${formattedCity}`;
+  const formattedCity = city.replace(' ', '-').toLowerCase();
+  const formattedState = state.replace(' ', '-').toLowerCase();
+  return `${formattedState}--${formattedCity}`;
 }
 
 CitySchema.pre('save', function(next) {
