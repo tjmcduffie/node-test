@@ -46,24 +46,25 @@ class CitiesRoute extends BaseJsonApiRoute {
     } = this._req.params;
     this._genResponse(() =>
       new Promise((resolve, reject) => {
-        const conditions = {
-          name: cityname,
-          state,
-        };
         const fields = null;
         const options = null;
-        City.findOne(conditions, fields, options, (err, doc) => {
-          console.log(conditions, fields, options, err, doc);
-          if (err) {
-            reject(new SystemError(err));
+        City.findOneByCityAndState(
+          cityname,
+          state,
+          fields,
+          options,
+          (err, doc) => {
+            if (err) {
+              reject(new SystemError(err));
+            }
+            if (!doc) {
+              reject(new NotFoundError());
+            }
+            resolve({
+              city: doc,
+            });
           }
-          if (!doc) {
-            reject(new NotFoundError());
-          }
-          resolve({
-            city: doc,
-          });
-        });
+        );
       })
     );
   }
