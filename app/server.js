@@ -87,7 +87,7 @@ if (ENV === EnvEnum.DEV) {
   const webpackDevMiddleware = require('webpack-dev-middleware');
   const webpackConfig = require('~/webpack.config');
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
-    noInfo: true,
+    noInfo: false,
     compress: true,
     lazy: true,
     publicPath: '/',

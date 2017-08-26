@@ -38,6 +38,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "ajv": "^5.2.2",
     "axios": "^0.16.2",
     "bunyan": "^1.8.10",
     "classnames": "^2.2.5",
