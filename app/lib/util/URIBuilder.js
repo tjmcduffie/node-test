@@ -6,6 +6,7 @@
 
 "use strict";
 
+const URIParam = require('~/app/lib/util/URIParam');
 const UrlPattern = require('url-pattern');
 
 class URIBuilder {
@@ -18,7 +19,7 @@ class URIBuilder {
   }
 
   setParam(name: string, value: string | number | boolean): URIBuilder {
-    this._params[name] = value;
+    this._params[name] = URIParam.prepare(value);
     return this;
   }
 
