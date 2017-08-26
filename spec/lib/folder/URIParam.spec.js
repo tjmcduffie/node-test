@@ -1,6 +1,6 @@
 "use strict";
 
-const URIParam = require('URIParam');
+const URIParam = require('~/app/lib/util/URIParam');
 
 describe('URIParam', () => {
   it('prepares param values for use in URIs', () => {
