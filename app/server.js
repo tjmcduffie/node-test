@@ -9,6 +9,7 @@
 require('css-modules-require-hook/preset');
 
 const {router: api, routePrefix: apiRoutePrefix} = require('~/app/api');
+const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 const EnvEnum = require('~/app/lib/EnvEnum');
@@ -29,6 +30,10 @@ const app = express();
 app.use(compression());
 app.use(cors());
 app.use(helmet());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true,
+}));
 
 // logging
 (() => {
