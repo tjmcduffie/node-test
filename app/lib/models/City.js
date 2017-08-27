@@ -6,13 +6,16 @@
 
 "use strict";
 
-export type CityType = {
-  _id: string,
+type UpdatableProps = {
   name: string,
   state: string,
   suggestedBy: 'Tim' | 'Kristine',
+};
+
+export type CityType = {
+  _id: string,
   updated: string,
-}
+} & UpdatableProps;
 
 export type CityData = {
   city: CityType,
@@ -28,7 +31,6 @@ const CitySchema = new mongoose.Schema({
   cityState: {
     index: true,
     lowercase: true,
-    // required: true,
     unique: true,
     type: String,
   },
@@ -70,7 +72,35 @@ CitySchema.statics.findOneByCityAndState = function(
     {cityState: formatCityState(city, state)},
     fields,
     options,
-    callback
+    callback,
+  );
+}
+
+CitySchema.statics.findOneByCityAndStateAndUpdate = function(
+  city: string,
+  state: string,
+  updates: UpdatableProps,
+  options: ?Object,
+  callback: (err: ?string, doc: ?Object) => void,
+) {
+  return this.findOneAndUpdate(
+    {cityState: formatCityState(city, state)},
+    updates,
+    options,
+    callback,
+  );
+}
+
+CitySchema.statics.findOneByCityAndStateAndRemove = function(
+  city: string,
+  state: string,
+  options: ?Object,
+  callback: (err: ?string, doc: ?Object) => void,
+) {
+  return this.findOneAndRemove(
+    {cityState: formatCityState(city, state)},
+    options,
+    callback,
   );
 }
 
