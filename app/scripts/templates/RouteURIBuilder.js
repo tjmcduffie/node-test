@@ -7,7 +7,11 @@ module.exports = (prefixedRoute, path) =>
 
 const URIBuilder = require('~/app/lib/util/URIBuilder.js');
 
-const ${prefixedRoute}URIBuilder = new URIBuilder(${path});
+const ${prefixedRoute}URIBuilder = {
+  getURIBuilder: () => {
+    return new URIBuilder(${path});
+  }
+};
 
 module.exports = ${prefixedRoute}URIBuilder;
 `;

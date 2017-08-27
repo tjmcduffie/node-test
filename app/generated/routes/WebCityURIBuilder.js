@@ -6,6 +6,10 @@
 
 const URIBuilder = require('~/app/lib/util/URIBuilder.js');
 
-const WebCityURIBuilder = new URIBuilder('/city/:state/:cityname');
+const WebCityURIBuilder = {
+  getURIBuilder: () => {
+    return new URIBuilder('/city/:state/:cityname');
+  }
+};
 
 module.exports = WebCityURIBuilder;

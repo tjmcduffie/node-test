@@ -30,6 +30,7 @@ const CitiesPage = (props: CitiesData): ReactElement<*> => {
         <ul>
           {cities.map(city => {
             const cityWebPath = WebCityURIBuilder
+              .getURIBuilder()
               .setParam('state', city.state)
               .setParam('cityname', city.name)
               .toString()
@@ -52,6 +53,7 @@ CitiesPage.genClientData = (
 ): Promise<CitiesData> => {
   const page = params.page || 0;
   const citiesApiRoute = ApiCitiesURIBuilder
+    .getURIBuilder()
     .setParam('page', page)
     .toString()
   return new Promise((resolve, reject) => {

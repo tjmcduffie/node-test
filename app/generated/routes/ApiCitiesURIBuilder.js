@@ -6,6 +6,10 @@
 
 const URIBuilder = require('~/app/lib/util/URIBuilder.js');
 
-const ApiCitiesURIBuilder = new URIBuilder('/api/cities/:page');
+const ApiCitiesURIBuilder = {
+  getURIBuilder: () => {
+    return new URIBuilder('/api/cities/:page');
+  }
+};
 
 module.exports = ApiCitiesURIBuilder;

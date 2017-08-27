@@ -96,5 +96,3 @@ function writeRouteFile(filename, prefixedRoute, path) {
 }
 
 routeDirs.forEach(dir => createClientRoutesFromServerRoutes(dir));
-
-return 0;

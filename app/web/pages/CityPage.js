@@ -43,6 +43,7 @@ CityPage.genClientData = (
     state,
   } = params;
   const cityApiRoute = ApiCityURIBuilder
+    .getURIBuilder()
     .setParam('cityname', cityname)
     .setParam('state', state)
     .toString();
