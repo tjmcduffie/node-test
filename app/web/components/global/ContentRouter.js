@@ -8,7 +8,7 @@
 
 import type {BrowserHistory} from '~/app/lib/util/browserHistory';
 import type {WebRouteType} from '~/app/lib/InternalRouteType';
-import type {Element as ReactElement} from 'react';
+import type {Node as ReactNode} from 'react';
 
 type Route = {
   name: string,
@@ -18,6 +18,11 @@ type Route = {
   options: Object,
   params: Object,
   query: Object,
+};
+
+type State = {
+  isLoading: boolean,
+  page: ?ReactNode,
 };
 
 const BaseError = require('~/app/lib/BaseError');
@@ -34,11 +39,8 @@ class ContentRouterError extends BaseError {
   status: ?number;
 }
 
-class ContentRouter extends React.Component {
-  state: {
-    isLoading: boolean,
-    page: ?ReactElement<*>,
-  };
+class ContentRouter extends React.Component<{}, State> {
+  state: *;
   _history: BrowserHistory;
   _router: router;
   _unlistenToHistory: ?() => void;
@@ -106,13 +108,13 @@ class ContentRouter extends React.Component {
     });
   }
 
-  _resolveWithInitialData(route: Route): ReactElement<*> {
+  _resolveWithInitialData(route: Route): ReactNode {
     const {config: {Component}} = route;
     const data = DataCache.get(Component.name);
     return <Component {...data} />;
   }
 
-  _resolveWithAPIData(route: Route): Promise<ReactElement<*>> {
+  _resolveWithAPIData(route: Route): Promise<ReactNode> {
     return new Promise((resolve, reject) => {
       const {
         config: {
@@ -131,7 +133,7 @@ class ContentRouter extends React.Component {
     });
   }
 
-  render(): ReactElement<*> {
+  render(): ReactNode {
     const {
       isLoading,
       page,

@@ -6,48 +6,7 @@
 
 "use strict";
 
-type AcceptedRequestMethods =
-  | 'delete'
-  | 'get'
-  | 'head'
-  | 'options'
-  | 'patch'
-  | 'post'
-  | 'put';
-
-type ResponseTypes =
-  | 'arraybuffer'
-  | 'blob'
-  | 'document'
-  | 'json'
-  | 'text'
-  | 'stream';
-
-type AxiosConfig = {
-  adapter?: (config: Object) => Promise<*>,
-  auth?: {
-    username: string,
-    password: string,
-  },
-  baseURL?: string,
-  cancelToken: string,
-  data?: Object,
-  headers?: Object,
-  maxContentLength: number,
-  maxRedirects: number,
-  method: AcceptedRequestMethods,
-  onDownloadProgress?: (e: Object) => void,
-  onUploadProgress?: (e: Object) => void,
-  params?: Object,
-  paramsSerializer?: (params: Object) => string,
-  responseType: ResponseTypes,
-  timeout: number,
-  transformRequest?: Array<(data: Object | string) => Object | string>,
-  transformResponse?: Array<(data: Object) => Object>,
-  url: string,
-  validateStatus?: (status: number) => boolean,
-  withCredentials: boolean,
-};
+import type {AxiosXHRConfig} from 'axios';
 
 const axios = require('axios');
 const CancelToken = axios.CancelToken;
@@ -56,7 +15,7 @@ const BASE_URL = 'http://localhost:3000';
 
 class AsyncRequest {
   _cancelCallback: ?Function;
-  _config: AxiosConfig;
+  _config: AxiosXHRConfig<*>;
 
   constructor(url: string) {
     this._config = {

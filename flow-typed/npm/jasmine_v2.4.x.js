@@ -1,5 +1,7 @@
-// flow-typed signature: ef26616bab1bc29529857aa721f70238
-// flow-typed version: fcaf13fb04/jasmine_v2.4.x/flow_vx.x.x
+// flow-typed signature: ef2dfa9357235f96a14cd698a585d8fb
+// flow-typed version: e49f59a6fc/jasmine_v2.4.x/flow_vx.x.x
+
+/* eslint-disable flowtype/no-weak-types */
 
 type JasmineExpectType = {
   not: JasmineExpectType,
@@ -26,13 +28,13 @@ declare function describe(name: string, fn: Function): void;
 declare function fdescribe(name: string, fn: Function): void;
 declare function xdescribe(name: string, fn: Function): void;
 
-declare function beforeEach(fn: Function): void;
-declare function afterEach(fn: Function): void;
-declare function beforeAll(fn: Function): void;
-declare function afterAll(fn: Function): void;
+declare function beforeEach(fn: Function, timeout?: number): void;
+declare function afterEach(fn: Function, timeout?: number): void;
+declare function beforeAll(fn: Function, timeout?: number): void;
+declare function afterAll(fn: Function, timeout?: number): void;
 
-declare function it(name: string, fn: Function): void;
-declare function fit(name: string, fn: Function): void;
+declare function it(name: string, fn: Function, timeout?: number): void;
+declare function fit(name: string, fn: Function, timeout?: number): void;
 declare function xit(name: string, fn: Function): void;
 
 declare function expect(value: mixed): JasmineExpectType;

@@ -6,7 +6,7 @@
 
 "use strict";
 
-import type {Element as ReactElement} from 'react';
+import type {Node as ReactNode} from 'react';
 
 type State = {
   isExpanded: boolean,
@@ -21,8 +21,8 @@ const style = require('~/app/static_src/css/Header.css');
 const styleGlobal = require('~/app/static_src/css/global.css');
 require('~/app/static_src/css/normalize.css');
 
-class Header extends React.PureComponent {
-  state: State = {
+class Header extends React.PureComponent<{}, State> {
+  state = {
     isExpanded: false,
   };
 
@@ -30,7 +30,7 @@ class Header extends React.PureComponent {
     this.setState({isExpanded: !this.state.isExpanded});
   }
 
-  render(): ReactElement<*> {
+  render(): ReactNode {
     return (
       <Block
         className={style.block}

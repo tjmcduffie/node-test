@@ -1,10 +1,12 @@
-/*global ReactClass*/
+/*global */
 /**
  *
  * @flow
  */
 
 "use strict";
+
+import type {ComponentType as ReactComponentType} from 'react';
 
 export type RouteMethodTypes = 'DELETE'|'GET'|'POST'|'PUT';
 
@@ -15,7 +17,7 @@ export type ApiRouteType = {
 };
 
 export type WebRouteType = {
-  Component: ReactClass<*>,
+  Component: ReactComponentType<*>,
   fetchData: (params: *) => Promise<*>,
   name: string,
   path: string,

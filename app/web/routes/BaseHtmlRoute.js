@@ -1,4 +1,4 @@
-/*global ReactClass*/
+/*global */
 /**
  *
  * @flow
@@ -7,16 +7,19 @@
 "use strict";
 
 import type {$Request, $Response} from 'express';
-import type {Element as ReactElement} from 'react';
+import type {
+  ComponentType as ReactComponentType,
+  Node as ReactNode,
+} from 'react';
 
 const BaseError = require('~/app/lib/BaseError');
 const DefaultContainer = require('~/app/web/components/layout/DefaultContainer');
 const React = require('react');
 
 class BaseHtmlRoute {
-  _container: ReactClass<*>;
+  _container: ReactComponentType<*>;
   _layoutView: string;
-  _pageComponent: ReactClass<*>;
+  _pageComponent: ReactComponentType<*>;
   _pageTitle: string;
   _req: $Request;
   _res: $Response;
@@ -29,11 +32,11 @@ class BaseHtmlRoute {
     this._res = res;
   }
 
-  getContainer(): ReactClass<*> {
+  getContainer(): ReactComponentType<*> {
     return this._container;
   }
 
-  setContainer(container: ReactClass<*>): void {
+  setContainer(container: ReactComponentType<*>): void {
     this._container = container;
   }
 
@@ -45,11 +48,11 @@ class BaseHtmlRoute {
     this._layoutView = view;
   }
 
-  getPageComponent(): ReactClass<*> {
+  getPageComponent(): ReactComponentType<*> {
     return this._pageComponent;
   }
 
-  setPageComponent(component: ReactClass<*>): void {
+  setPageComponent(component: ReactComponentType<*>): void {
     this._pageComponent = component;
   }
 
@@ -61,7 +64,7 @@ class BaseHtmlRoute {
     this._pageTitle = title;
   }
 
-  setDesktopResponse(data: Object): ReactElement<*> {
+  setDesktopResponse(data: Object): ReactNode {
     if (!data) {
       throw new BaseHtmlRouteError('setDesktopResponse needs a data param');
     }
@@ -77,9 +80,9 @@ class BaseHtmlRoute {
   async get(): Promise<*> {
     try {
       const pageData = await this.genData();
-      const pageContent: ?Array<ReactElement<*>>|ReactElement<*> =
+      const pageContent: ?Array<ReactNode>|ReactNode =
         this.setDesktopResponse(pageData);
-      const pageContainer: ?ReactElement<*> = React.createElement(
+      const pageContainer: ?ReactNode = React.createElement(
         this.getContainer(),
         {
           pageData,

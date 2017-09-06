@@ -6,7 +6,7 @@
 
 "use strict";
 
-import type {Element as ReactElement} from 'react';
+import type {Node as ReactNode} from 'react';
 
 type NavLink = {
   name: string,
@@ -34,10 +34,10 @@ const navLinks: Array<NavLink> = [
   },
 ];
 
-class MainNav extends React.PureComponent {
+class MainNav extends React.PureComponent<Props> {
   props: Props;
 
-  render(): ReactElement<*> {
+  render(): ReactNode {
     return (
       <nav
         className={cx(

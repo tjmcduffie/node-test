@@ -1,4 +1,4 @@
-/*global */
+/*global SyntheticEvent*/
 /**
  *
  * @flow
@@ -6,14 +6,14 @@
 
 "use strict";
 
-import type {Element as ReactElement} from 'react';
+import type {Node as ReactNode} from 'react';
 
 type ButtonStyles = 'green'|'grey';
 
 type Props = {
   children: string,
   href: string,
-  onClick?: (e: Event) => void, 
+  onClick?: (e: SyntheticEvent<>) => void,
   theme: ButtonStyles,
 };
 
@@ -23,7 +23,7 @@ const React = require('react');
 const cx = require('classNames');
 const style = require('~/app/static_src/css/Button.css');
 
-class Button extends React.PureComponent {
+class Button extends React.PureComponent<Props> {
   props: Props;
 
   static theme: {[string]: ButtonStyles} = {
@@ -31,7 +31,7 @@ class Button extends React.PureComponent {
     GREY: 'grey',
   };
 
-  render(): ReactElement<*> {
+  render(): ReactNode {
     const {
       children,
       href,

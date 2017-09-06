@@ -6,12 +6,12 @@
 
 "use strict";
 
-import type {Element as ReactElement} from 'react';
+import type {Node as ReactNode} from 'react';
 
 type BlockStyles = 'green'|'grey'|'gridDark'|'gridLight'|'none'|'white';
 
 type Props = {
-  children: ReactElement<*> | Array<ReactElement<*>>,
+  children: ReactNode | Array<ReactNode>,
   className?: string,
   classNameInner?: string,
   theme: BlockStyles,
@@ -22,7 +22,7 @@ const React = require('react');
 const cx = require('classNames');
 const style = require('~/app/static_src/css/Block.css');
 
-class Block extends React.PureComponent {
+class Block extends React.PureComponent<Props> {
   props: Props;
 
   static theme: {[string]: BlockStyles} = {
@@ -34,7 +34,7 @@ class Block extends React.PureComponent {
     WHITE: 'white',
   };
 
-  render(): ReactElement<*> {
+  render(): ReactNode {
     const {
       children,
       className,

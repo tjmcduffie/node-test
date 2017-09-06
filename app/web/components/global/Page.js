@@ -15,7 +15,7 @@ const cx = require('classNames');
 const style = require('~/app/static_src/css/Page.css');
 
 const Page = (props: {
-  children: Block<*>,
+  children: React.ChildrenArray<React.Element<typeof Block>>,
   className?: string,
 }): ReactElement<*> => {
   return (
