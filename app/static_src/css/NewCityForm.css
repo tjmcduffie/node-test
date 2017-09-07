@@ -1,0 +1,53 @@
+/**
+ * LOADING_SCREEN
+ */
+.root {
+  width: 100%;
+}
+
+.label {
+  display: flex;
+  flex-flow: row wrap;
+  margin-bottom: 12px;
+}
+
+.label > :nth-child(1) {
+  flex: 2 0 50%;
+}
+
+.label > :nth-child(2) {
+  flex: 2 0 50%;
+}
+
+.input, .select {
+  font-size: 16px;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.submit {
+  margin-top: 15px;
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+.error::before {
+  border: 2px solid red;
+  border-radius: 14px;
+  color: red;
+  content: '!';
+  display: inline-block;
+  font-size: 14px;
+  font-weight: bold;
+  height: 20px;
+  line-height: 18px;
+  margin-right: 5px;
+  text-align: center;
+  width: 20px;
+}

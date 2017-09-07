@@ -10,6 +10,14 @@ import type {NextFunction, $Request, $Response} from 'express';
 import type {RouteMethodTypes} from '~/app/lib/InternalRouteType';
 
 export type MethodVersionHash = {[string]: Function};
+export type Response = {
+  data: Object,
+  error: ?{
+    message: string,
+    name: string,
+    status: number,
+  },
+};
 
 const setVersions = require('express-routes-versioning')();
 
@@ -51,14 +59,7 @@ class BaseJsonApiRoute {
   }
 
   async _genResponse(genData: () => Promise<Object>) {
-    const responseData: {
-      data: Object,
-      error: ?{
-        message: string,
-        name: string,
-        status: number,
-      },
-    } = {
+    const responseData: Response = {
       data: {},
       error: null,
     };

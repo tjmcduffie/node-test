@@ -7,7 +7,7 @@
 "use strict";
 
 import type {CitiesData} from '~/app/lib/models/City';
-import type {Element as ReactElement} from 'react';
+import type {Node as ReactNode} from 'react';
 
 export type CitiesRouteParamsType = {
   page?: number,
@@ -16,17 +16,19 @@ export type CitiesRouteParamsType = {
 const ApiCitiesURIBuilder = require('~/app/generated/routes/ApiCitiesURIBuilder');
 const AsyncRequest = require('~/app/lib/util/AsyncRequest');
 const Block = require('~/app/web/components/global/Block');
+const NewCityButton = require('~/app/web/components/city/NewCityButton')
 const Link = require('~/app/web/components/global/Link');
 const Page = require('~/app/web/components/global/Page');
 const React = require('react');
 const WebCityURIBuilder = require('~/app/generated/routes/WebCityURIBuilder');
 
-const CitiesPage = (props: CitiesData): ReactElement<*> => {
+const CitiesPage = (props: CitiesData): ReactNode => {
   const {cities} = props;
   return (
     <Page>
       <Block theme={Block.theme.GREY}>
         <p>Cities Page</p>
+        <NewCityButton />
         <ul>
           {cities.map(city => {
             const cityWebPath = WebCityURIBuilder

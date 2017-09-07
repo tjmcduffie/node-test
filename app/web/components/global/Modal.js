@@ -36,7 +36,7 @@ class Modal extends React.PureComponent<Props, State> {
   }
 
   componentWillReceiveProps(nextProps: Props) {
-    if (nextProps.isShown) {
+    if (nextProps.isShown !== this.props.isShown) {
       this.setState({isShown: nextProps.isShown});
     }
   }

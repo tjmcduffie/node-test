@@ -6,16 +6,16 @@
 
 "use strict";
 
-type UpdatableProps = {
+export type CityDataMutableFields = {
   name: string,
   state: string,
-  suggestedBy: 'Tim' | 'Kristine',
+  suggestedBy: string,
 };
 
 export type CityType = {
   _id: string,
   updated: string,
-} & UpdatableProps;
+} & CityDataMutableFields;
 
 export type CityData = {
   city: CityType,
@@ -79,7 +79,7 @@ CitySchema.statics.findOneByCityAndState = function(
 CitySchema.statics.findOneByCityAndStateAndUpdate = function(
   city: string,
   state: string,
-  updates: UpdatableProps,
+  updates: CityDataMutableFields,
   options: ?Object,
   callback: (err: ?string, doc: ?Object) => void,
 ) {

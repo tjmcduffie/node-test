@@ -2,7 +2,7 @@
  * Button
  */
 .root {
-  display: block;
+  display: inline-block;
   padding: 15px 18px;
   position: relative;
   text-decoration: none;
