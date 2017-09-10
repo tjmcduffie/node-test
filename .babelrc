@@ -13,7 +13,10 @@
 
   "env": {
     "test": {
-      "presets": ["flow"],
+      "presets": [
+        "flow",
+        "react",
+      ],
       "plugins": ["istanbul"]
     },
   }

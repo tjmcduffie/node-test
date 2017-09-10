@@ -1,5 +1,7 @@
 "use strict";
 
+require('css-modules-require-hook/preset');
+
 const args = require('args');
 const Database = require('~/app/lib/Database');
 const Jasmine = require('jasmine');
