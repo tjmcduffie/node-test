@@ -4,6 +4,7 @@ const enzyme = require('enzyme');
 const jasmineEnzyme = require('jasmine-enzyme');
 const Modal = require('~/app/web/components/global/Modal');
 const React = require('react');
+const ReactModal = require('react-modal');
 const style = require('~/app/static_src/css/Modal.css');
 
 describe('<Modal />', () => {
@@ -14,81 +15,61 @@ describe('<Modal />', () => {
     jasmineEnzyme();
   });
 
-  describe('markup', () => {
-    it('renders an empty <div/> when hidden', () => {
-      const wrapper = shallow(<Modal />);
-      expect(wrapper.html()).toEqual('<div></div>');
-    });
-
-    it('renders the basics when shown', () => {
-      const wrapper = shallow(<Modal isShown={true} title="test" />);
-      expect(wrapper.find('h1').length).toBe(1);
-      expect(wrapper.find('h1').text()).toBe('test');
-      expect(wrapper.find(`.${style.close}`).length).toBe(1);
-      expect(wrapper.find(`.${style.content}`).children().length).toBe(0);
-    });
-
-    it('displays child components in the content area', () => {
-      const content = <div>this is the content</div>;
-      const wrapper = shallow(
-        <Modal isShown={true} title="test">
-          {content}
-        </Modal>
-      );
-      expect(wrapper.find(`.${style.content}`).children().length).toBe(1);
-      // expect(wrapper.find(`.${style.content}`).html())
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeTruthy();
-    });
+  it('should render a ReactModal', () => {
+    const wrapper = shallow(
+      <Modal isShown={false} title="test">
+        const content = <div>this is the content</div>
+      </Modal>
+    );
+    expect(wrapper.find(ReactModal).length).toBe(1);
   });
 
-  describe('behaviors', () => {
-    it('toggles visibility when props are updated', () => {
-      const content = <div>this is the content</div>;
+  it('should set apply the correct base classnames', () => {
+    const wrapper = shallow(
+      <Modal isShown={false} title="test">
+        <div>this is the content</div>
+      </Modal>
+    );
+    expect(wrapper.prop('className')).toBe(style.container);
+    expect(wrapper.prop('overlayClassName')).toBe(style.screen);
+  });
+
+  describe('shown state', () => {
+    it('should propagate when receeiving props', () => {
       const wrapper = shallow(
         <Modal isShown={false} title="test">
-          {content}
+          <div>this is the content</div>
         </Modal>
       );
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeFalsy();
+      expect(wrapper.find(ReactModal).prop('isOpen')).toBeFalsy();
       wrapper.setProps({isShown: true});
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeTruthy();
+      expect(wrapper.find(ReactModal).prop('isOpen')).toBeTruthy();
       wrapper.setProps({isShown: false});
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeFalsy();
+      expect(wrapper.find(ReactModal).prop('isOpen')).toBeFalsy();
     });
 
-    it('hides the modal when the close button is clicked', () => {
-      const content = <div>this is the content</div>;
+    it('should be updated when the click button is closed', () => {
       const wrapper = shallow(
-        <Modal isShown={true} title="test">
-          {content}
+        <Modal isShown={false} title="test">
+          <div>this is the content</div>
         </Modal>
       );
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeTruthy();
+      wrapper.setProps({isShown: true});
       wrapper.find(`.${style.close}`).simulate('click', eventMock);
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeFalsy();
+      expect(wrapper.find(ReactModal).prop('isOpen')).toBeFalsy();
     });
 
-    it('hides the modal when the escape key is pressed', () => {
-      const content = <div>this is the content</div>;
+    it('should pass _handleClose to onRequestClose', () => {
       const wrapper = shallow(
-        <Modal isShown={true} title="test">
-          {content}
+        <Modal isShown={false} title="test">
+          <div>this is the content</div>
         </Modal>
       );
-      const eventMockKey = Object.assign({key: "Escape"}, eventMock);
-      const eventMockKeyCode = Object.assign({keyCode: 27}, eventMock);
-      const eventMockRandoKey = Object.assign({key: "A"}, eventMock);
-
-      wrapper.find(`.${style.close}`).simulate('keypress', eventMockKey);
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeFalsy();
-
-      wrapper.setProps({isShown: true});
-      wrapper.find(`.${style.close}`).simulate('keypress', eventMockKeyCode);
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeFalsy();
-
-      wrapper.setProps({isShown: true});
-      wrapper.find(`.${style.close}`).simulate('keypress', eventMockRandoKey);
-      expect(wrapper.find(`.${style.content}`).contains(content)).toBeTruthy();
+      const onRequestClose = wrapper.find(ReactModal).prop('onRequestClose');
+      expect(onRequestClose).toBeDefined();
+      expect(typeof onRequestClose).toBe('function');
     });
   });
+
+
 });
