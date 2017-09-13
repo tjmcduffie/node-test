@@ -1,6 +1,7 @@
 "use strict";
 
 require('css-modules-require-hook/preset');
+require('~/spec/setup-dom.js');
 
 const args = require('args');
 const Database = require('~/app/lib/Database');
