@@ -7,7 +7,7 @@
 "use strict";
 
 import type {Response as JSONResponse} from '~/app/api/routes/BaseJsonApiRoute';
-import type {CityDataMutableFields} from '~/app/lib/models/City';
+import type {LocationDataMutableFields} from '~/app/lib/models/Location';
 import type {Node as ReactNode} from 'react';
 
 type FieldType = {
@@ -23,22 +23,22 @@ type Props = {
   onSubmitComplete: (response: ?JSONResponse, e: ?string) => void;
 };
 
-type CityDataInputs = {
-  city: FieldType,
+type LocationDataInputs = {
+  location: FieldType,
   state: FieldType,
   suggestedBy: FieldType,
 }
 
 type State = {
-} & CityDataInputs;
+} & LocationDataInputs;
 
-const ApiCityURIBuilder = require('~/app/generated/routes/ApiCityURIBuilder');
+const ApiLocationURIBuilder = require('~/app/generated/routes/ApiLocationURIBuilder');
 const AsyncRequest = require('~/app/lib/util/AsyncRequest');
 const Button = require('~/app/web/components/global/Button');
 const React = require('react');
 
 const cx = require('classNames');
-const style = require('~/app/static_src/css/NewCityForm.css');
+const style = require('~/app/static_src/css/NewLocationForm.css');
 const globalstyle = require('~/app/static_src/css/global.css');
 
 const profileNames = [
@@ -53,7 +53,7 @@ const states = [
   'WI', 'WV', 'WY',
 ];
 
-class NewCityForm extends React.Component<Props, State> {
+class NewLocationForm extends React.Component<Props, State> {
   props: Props;
   state: State;
 
@@ -61,7 +61,7 @@ class NewCityForm extends React.Component<Props, State> {
     super(props);
     this.state = {
       isLoading: false,
-      city: {
+      location: {
         error: null,
         value: '',
       },
@@ -76,27 +76,27 @@ class NewCityForm extends React.Component<Props, State> {
     };
   }
 
-  _convertFieldsToMutableData(input: CityDataInputs): CityDataMutableFields {
+  _convertFieldsToMutableData(input: LocationDataInputs): LocationDataMutableFields {
     let hasErrors = false;
     const output = {};
     const updatedInputs = {};
     Object
       .keys(input)
-      .filter(key => ['city', 'state', 'suggestedBy'].includes(key))
+      .filter(key => ['location', 'state', 'suggestedBy'].includes(key))
       .forEach(key => {
         if (this._isEmptyString(input[key].value)) {
           hasErrors = true;
           updatedInputs[key] = input[key];
           updatedInputs[key].error = `${key} is required`;
         } else {
-          const outputKey = key !== 'city' ? key : 'cityname';
+          const outputKey = key !== 'location' ? key : 'locationname';
           output[outputKey] = input[key].value;
         }
       });
 
     if (hasErrors) {
       this.setState(updatedInputs);
-      throw new Error('Cannot convert input to CityDataMutableFields');
+      throw new Error('Cannot convert input to LocationDataMutableFields');
     }
 
     return output;
@@ -109,12 +109,12 @@ class NewCityForm extends React.Component<Props, State> {
       // @TODO need to set a loading state here.
       // loading state in the state object will mess up the current structure a
       // bit it *should* be handled well but its better to introduce redux
-      const cityApiRoute = ApiCityURIBuilder
+      const locationApiRoute = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('cityname', data.cityname)
+        .setParam('locationname', data.locationname)
         .setParam('state', data.state)
         .toString()
-      new AsyncRequest(cityApiRoute)
+      new AsyncRequest(locationApiRoute)
         .setData(data)
         .post()
         .then((response: JSONResponse) => {
@@ -148,7 +148,7 @@ class NewCityForm extends React.Component<Props, State> {
 
   render(): ReactNode {
     const {
-      city,
+      location,
       state,
       suggestedBy,
     } = this.state;
@@ -158,22 +158,22 @@ class NewCityForm extends React.Component<Props, State> {
         onSubmit={this._handleSubmit}
       >
         <label className={cx(style.label)}>
-          <span>City Name</span>
+          <span>City/Metro area</span>
           <input
             className={cx(style.input)}
-            name="city"
+            name="location"
             onChange={this._handleInputChange}
             required={true}
             type="text"
-            value={city.value}
+            value={location.value}
           />
           <span
             className={cx({
               [style.error]: true,
-              [globalstyle.hidden]: !city.error,
+              [globalstyle.hidden]: !location.error,
             })}
           >
-            {city.error}
+            {location.error}
           </span>
         </label>
         <label className={cx(style.label)}>
@@ -242,4 +242,4 @@ class NewCityForm extends React.Component<Props, State> {
   }
 }
 
-module.exports = NewCityForm;
+module.exports = NewLocationForm;

@@ -6,39 +6,39 @@
 
 "use strict";
 
-import type {CityData} from '~/app/lib/models/City';
+import type {LocationData} from '~/app/lib/models/Location';
 import type {$Request, $Response} from 'express';
 import type {Element as ReactElement} from 'react';
 
 
 const BaseHtmlRoute = require('~/app/web/routes/BaseHtmlRoute');
-const City = require('~/app/lib/models/City');
-const CityPage = require('~/app/web/pages/CityPage');
+const Location = require('~/app/lib/models/Location');
+const LocationPage = require('~/app/web/pages/LocationPage');
 const React = require('react');
 
-const CityRoutePath: string = '/city/:state/:cityname';
+const LocationRoutePath: string = '/location/:state/:locationname';
 
-class CityRoute extends BaseHtmlRoute {
+class LocationRoute extends BaseHtmlRoute {
   static getPath(): string {
-    return CityRoutePath;
+    return LocationRoutePath;
   }
 
   constructor(req: $Request, res: $Response): void {
     super(req, res);
-    this.setPageComponent(CityPage);
-    this.setPageTitle('City');
+    this.setPageComponent(LocationPage);
+    this.setPageTitle('Location');
   }
 
-  genData(): Promise<CityData> {
+  genData(): Promise<LocationData> {
     const {
-      cityname,
+      locationname,
       state,
     } = this._req.params;
     return new Promise((resolve, reject) => {
       const fields = null;
       const options = null;
-      City.findOneByCityAndState(
-        cityname,
+      Location.findOneByLocationAndState(
+        locationname,
         state,
         fields,
         options,
@@ -46,15 +46,15 @@ class CityRoute extends BaseHtmlRoute {
           if (err) {
             reject(err);
           }
-          resolve({city: doc});
+          resolve({location: doc});
         }
       );
     });
   }
 
-  setDesktopResponse(data: CityData): ReactElement<*> {
+  setDesktopResponse(data: LocationData): ReactElement<*> {
     return React.createElement(this.getPageComponent(), data);
   }
 }
 
-module.exports = CityRoute;
+module.exports = LocationRoute;

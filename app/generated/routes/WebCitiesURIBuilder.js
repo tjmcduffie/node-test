@@ -6,10 +6,10 @@
 
 const URIBuilder = require('~/app/lib/util/URIBuilder.js');
 
-const WebCitiesURIBuilder = {
+const WebLocationsURIBuilder = {
   getURIBuilder: () => {
-    return new URIBuilder('/cities/:page?');
+    return new URIBuilder('/locations/:page?');
   }
 };
 
-module.exports = WebCitiesURIBuilder;
+module.exports = WebLocationsURIBuilder;

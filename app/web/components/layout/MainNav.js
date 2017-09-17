@@ -29,8 +29,8 @@ const navLinks: Array<NavLink> = [
     name: 'Sample',
     path: router.makePath('SampleRoute'),
   }, {
-    name: 'Cities',
-    path: router.makePath('CitiesRoute', {page: 0}),
+    name: 'Locations',
+    path: router.makePath('LocationsRoute', {page: 0}),
   },
 ];
 

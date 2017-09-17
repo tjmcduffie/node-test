@@ -9,7 +9,7 @@
 const EnvEnum = require('~/app/lib/EnvEnum');
 const mongoose = require('mongoose');
 
-const DB_NAME = 'grimlock-city-living';
+const DB_NAME = 'grimlock-location-living';
 const ENV = process.env.NODE_ENV;
 
 const connect = (): Promise<*> => {

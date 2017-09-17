@@ -6,24 +6,24 @@
 
 "use strict";
 
-import type {CityType} from '~/app/lib/models/City';
+import type {LocationType} from '~/app/lib/models/Location';
 import type {NextFunction, $Request, $Response} from 'express';
 
-export type CitiesData = {
-  cities: Array<CityType>,
+export type LocationsData = {
+  locations: Array<LocationType>,
 };
 
 const BaseJsonApiRoute = require('~/app/api/routes/BaseJsonApiRoute');
-const City = require('~/app/lib/models/City');
+const Location = require('~/app/lib/models/Location');
 const {NotFoundError, SystemError} = require('~/app/lib/ServerErrors');
 
-const CitiesRoutePath: string = '/api/cities/:page';
+const LocationsRoutePath: string = '/api/locations/:page';
 const CITIES_COUNT = 25;
 
 
-class CitiesRoute extends BaseJsonApiRoute {
+class LocationsRoute extends BaseJsonApiRoute {
   static getPath() {
-    return CitiesRoutePath;
+    return LocationsRoutePath;
   }
 
   constructor(req: $Request, res: $Response, next: NextFunction): void {
@@ -52,7 +52,7 @@ class CitiesRoute extends BaseJsonApiRoute {
           limit: CITIES_COUNT,
           skip,
         };
-        City.find(conditions, fields, options, (err, docs) => {
+        Location.find(conditions, fields, options, (err, docs) => {
           if (err) {
             reject(new SystemError(err));
           }
@@ -60,7 +60,7 @@ class CitiesRoute extends BaseJsonApiRoute {
             reject(new NotFoundError());
           }
           resolve({
-            cities: docs,
+            locations: docs,
           });
         });
       })
@@ -75,4 +75,4 @@ class CitiesRoute extends BaseJsonApiRoute {
   }
 }
 
-module.exports = CitiesRoute;
+module.exports = LocationsRoute;

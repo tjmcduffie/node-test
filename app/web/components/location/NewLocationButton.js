@@ -18,12 +18,12 @@ type State = {
 
 const Button = require('~/app/web/components/global/Button');
 const Modal = require('~/app/web/components/global/Modal');
-const NewCityForm = require('~/app/web/components/city/NewCityForm');
+const NewLocationForm = require('~/app/web/components/location/NewLocationForm');
 const React = require('react');
 
 // const cx = require('classNames');
 
-class NewCityButton extends React.PureComponent<Props, State> {
+class NewLocationButton extends React.PureComponent<Props, State> {
   props: Props;
   state: State;
 
@@ -60,18 +60,18 @@ class NewCityButton extends React.PureComponent<Props, State> {
           onClick={this._handleClick}
           theme={Button.theme.GREY}
         >
-          Add new City
+          Add new Location
         </Button>
         <Modal
           isShown={this.state.isModalVisible}
           onClose={this._handleModalClose}
-          title={'Add new city'}
+          title={'Add new location'}
         >
-          <NewCityForm onSubmitComplete={this._handleSubmitComplete} />
+          <NewLocationForm onSubmitComplete={this._handleSubmitComplete} />
         </Modal>
       </div>
     );
   }
 }
 
-module.exports = NewCityButton;
+module.exports = NewLocationButton;

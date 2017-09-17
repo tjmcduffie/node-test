@@ -2,15 +2,14 @@
 
 const server = require('~/app/server');
 const request = require('superagent');
-const CityRoute = require('~/app/web/routes/CityRoute')
+const LocationsRoute = require('~/app/web/routes/LocationsRoute')
 
 const PORT = 3001;
-const PATH = CityRoute.getPath()
-  .replace(':state','ma')
-  .replace(':cityname','boston');
+const PATH = LocationsRoute.getPath()
+  .replace(':page','0');
 const uri = `http://localhost:${PORT}${PATH}`;
 
-describe('The City page', () => {
+describe('The Locations page', () => {
   let app
 
   afterEach(() => {

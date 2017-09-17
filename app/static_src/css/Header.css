@@ -136,7 +136,7 @@
   margin-top: -10px; /* top padding on .block */
 }
 @media (min-width: 660px) {
-  .root .mainNav { /* .rrot added to give selector more specificity */
+  .root .mainNav { /* .rrot added to give selector more specifilocation */
     display: block;
   }
 }

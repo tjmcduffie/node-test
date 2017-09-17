@@ -15,8 +15,8 @@ const ROUTE_PREFIX = '';
 
 // routes
 [
-  require('~/app/api/routes/CityRoute'),
-  require('~/app/api/routes/CitiesRoute'),
+  require('~/app/api/routes/LocationRoute'),
+  require('~/app/api/routes/LocationsRoute'),
   require('~/app/api/routes/SampleRoute'),
 ].forEach(Route => {
   router.route(Route.getPath())

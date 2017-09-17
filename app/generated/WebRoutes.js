@@ -16,17 +16,17 @@ const fetcherMock = (): Promise<*> => {
 
 const routes: WebRouteListType = [
   {
-    Component: require('~/app/web/pages/CitiesPage'),               // const CitiesPage = ((require('~/app/web/pages/CitiesPage')));
-    fetchData: require('~/app/web/pages/CitiesPage').genClientData, // always genClientData
+    Component: require('~/app/web/pages/LocationsPage'),               // const LocationsPage = ((require('~/app/web/pages/LocationsPage')));
+    fetchData: require('~/app/web/pages/LocationsPage').genClientData, // always genClientData
     method: 'get',                                                  // web only allows get
-    name: 'CitiesRoute',                                            // class ((CitiesRoute)) extends BaseHtmlRoute {
-    path: '/cities/:page?',                                         // const CitiesRoutePath: string = (('/cities/:page?'));
+    name: 'LocationsRoute',                                            // class ((LocationsRoute)) extends BaseHtmlRoute {
+    path: '/locations/:page?',                                         // const LocationsRoutePath: string = (('/locations/:page?'));
   },{
-    Component: require('~/app/web/pages/CityPage'),
-    fetchData: require('~/app/web/pages/CityPage').genClientData,
+    Component: require('~/app/web/pages/LocationPage'),
+    fetchData: require('~/app/web/pages/LocationPage').genClientData,
     method: 'get',
-    name: 'CityRoute',
-    path: '/city/:state/:cityname',
+    name: 'LocationRoute',
+    path: '/location/:state/:locationname',
   },{
     Component: require('~/app/web/pages/SamplePage'),
     fetchData: fetcherMock,

@@ -6,10 +6,10 @@
 
 const URIBuilder = require('~/app/lib/util/URIBuilder.js');
 
-const WebError500URIBuilder = {
+const WebLocationURIBuilder = {
   getURIBuilder: () => {
-    return new URIBuilder('/system-error');
+    return new URIBuilder('/location/:state/:locationname');
   },
 };
 
-module.exports = WebError500URIBuilder;
+module.exports = WebLocationURIBuilder;

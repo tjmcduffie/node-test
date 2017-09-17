@@ -1,6 +1,6 @@
 "use strict";
 
-const CityData = [
+const LocationData = [
   {
     name: 'Boston',
     state: 'MA',
@@ -23,4 +23,4 @@ const CityData = [
   },
 ];
 
-module.exports = CityData;
+module.exports = LocationData;

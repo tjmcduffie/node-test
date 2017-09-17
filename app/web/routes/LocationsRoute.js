@@ -6,31 +6,31 @@
 
 "use strict";
 
-import type {CitiesData} from '~/app/lib/models/City';
+import type {LocationsData} from '~/app/lib/models/Location';
 import type {$Request, $Response} from 'express';
 import type {Element as ReactElement} from 'react';
 
 const BaseHtmlRoute = require('~/app/web/routes/BaseHtmlRoute');
-const CitiesPage = require('~/app/web/pages/CitiesPage');
-const City = require('~/app/lib/models/City');
+const LocationsPage = require('~/app/web/pages/LocationsPage');
+const Location = require('~/app/lib/models/Location');
 const React = require('react');
 const {NotFoundError, SystemError} = require('~/app/lib/ServerErrors');
 
-const CitiesRoutePath: string = '/cities/:page?';
+const LocationsRoutePath: string = '/locations/:page?';
 const CITIES_COUNT = 25;
 
-class CitiesRoute extends BaseHtmlRoute {
+class LocationsRoute extends BaseHtmlRoute {
   static getPath(): string {
-    return CitiesRoutePath;
+    return LocationsRoutePath;
   }
 
   constructor(req: $Request, res: $Response): void {
     super(req, res);
-    this.setPageComponent(CitiesPage);
-    this.setPageTitle('Cities');
+    this.setPageComponent(LocationsPage);
+    this.setPageTitle('Locations');
   }
 
-  genData(): Promise<CitiesData> {
+  genData(): Promise<LocationsData> {
     const {page: pageParam} = this._req.params;
     const page = parseInt(pageParam, 10) || 0;
     const skip = CITIES_COUNT * page;
@@ -41,7 +41,7 @@ class CitiesRoute extends BaseHtmlRoute {
         limit: CITIES_COUNT,
         skip,
       };
-      City.find(conditions, fields, options, (err, docs) => {
+      Location.find(conditions, fields, options, (err, docs) => {
         if (err) {
           reject(new SystemError(err));
         }
@@ -49,15 +49,15 @@ class CitiesRoute extends BaseHtmlRoute {
           reject(new NotFoundError());
         }
         resolve({
-          cities: docs,
+          locations: docs,
         });
       });
     });
   }
 
-  setDesktopResponse(data: CitiesData): ReactElement<*> {
+  setDesktopResponse(data: LocationsData): ReactElement<*> {
     return React.createElement(this.getPageComponent(), data);
   }
 }
 
-module.exports = CitiesRoute;
+module.exports = LocationsRoute;

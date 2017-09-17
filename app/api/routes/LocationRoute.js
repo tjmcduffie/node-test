@@ -6,23 +6,23 @@
 
 "use strict";
 
-import type {CityType} from '~/app/lib/models/City';
+import type {LocationType} from '~/app/lib/models/Location';
 import type {NextFunction, $Request, $Response} from 'express';
 
-export type CitiesData = {
-  cities: Array<CityType>,
+export type LocationsData = {
+  locations: Array<LocationType>,
 };
 
 const BaseJsonApiRoute = require('~/app/api/routes/BaseJsonApiRoute');
-const City = require('~/app/lib/models/City');
+const Location = require('~/app/lib/models/Location');
 const {NotFoundError, SystemError} = require('~/app/lib/ServerErrors');
 
-const CitiesRoutePath: string = '/api/city/:state/:cityname';
+const LocationsRoutePath: string = '/api/location/:state/:locationname';
 
 
-class CitiesRoute extends BaseJsonApiRoute {
+class LocationsRoute extends BaseJsonApiRoute {
   static getPath() {
-    return CitiesRoutePath;
+    return LocationsRoutePath;
   }
 
   constructor(req: $Request, res: $Response, next: NextFunction): void {
@@ -37,24 +37,24 @@ class CitiesRoute extends BaseJsonApiRoute {
 
   delete_v1_0_0() {
     const {
-      cityname,
+      locationname,
       state,
     } = this._req.params;
     this._genResponse(() =>
       new Promise((resolve, reject) => {
-        City.findOneByCityAndStateAndRemove(
-          cityname,
+        Location.findOneByLocationAndStateAndRemove(
+          locationname,
           state,
           null, // options
-          (err, city) => {
+          (err, location) => {
             if (err) {
               reject(new SystemError(err));
             }
-            if (!city) {
+            if (!location) {
               reject(new NotFoundError());
             }
             resolve({
-              city,
+              location,
             });
           },
         );
@@ -64,25 +64,25 @@ class CitiesRoute extends BaseJsonApiRoute {
 
   get_v1_0_0() {
     const {
-      cityname,
+      locationname,
       state,
     } = this._req.params;
     this._genResponse(() =>
       new Promise((resolve, reject) => {
-        City.findOneByCityAndState(
-          cityname,
+        Location.findOneByLocationAndState(
+          locationname,
           state,
           null, // fields
           null, // options
-          (err, city) => {
+          (err, location) => {
             if (err) {
               reject(new SystemError(err));
             }
-            if (!city) {
+            if (!location) {
               reject(new NotFoundError());
             }
             resolve({
-              city,
+              location,
             });
           },
         );
@@ -92,23 +92,23 @@ class CitiesRoute extends BaseJsonApiRoute {
 
   post_v1_0_0() {
     const {
-      cityname: name,
+      locationname: name,
       state,
       suggestedBy,
     } = this._req.body;
     this._genResponse(() =>
       new Promise((resolve, reject) => {
-        City.create(
+        Location.create(
           {
             name,
             state,
             suggestedBy,
           },
-          (err, city) => {
+          (err, location) => {
             if (err) {
               reject(new SystemError(err));
             }
-            resolve({city});
+            resolve({location});
           },
         );
       })
@@ -117,7 +117,7 @@ class CitiesRoute extends BaseJsonApiRoute {
 
   put_v1_0_0() {
     const {
-      cityname: old_cityname,
+      locationname: old_locationname,
       state: old_state,
     } = this._req.params;
 
@@ -139,19 +139,19 @@ class CitiesRoute extends BaseJsonApiRoute {
 
     this._genResponse(() =>
       new Promise((resolve, reject) => {
-        City.findOneByCityAndStateAndUpdate(
-          old_cityname,
+        Location.findOneByLocationAndStateAndUpdate(
+          old_locationname,
           old_state,
           updates,
           {new: true},
-          (err, city) => {
+          (err, location) => {
             if (err) {
               reject(new SystemError(err));
             }
-            if (!city) {
+            if (!location) {
               reject(new NotFoundError());
             }
-            resolve({city});
+            resolve({location});
           },
         );
       })
@@ -159,4 +159,4 @@ class CitiesRoute extends BaseJsonApiRoute {
   }
 }
 
-module.exports = CitiesRoute;
+module.exports = LocationsRoute;

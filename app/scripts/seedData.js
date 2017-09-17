@@ -2,11 +2,11 @@
 
 const args = require('args');
 const chalk = require('chalk');
-const City = require('~/app/lib/models/City');
-const CityData = require('~/app/scripts/stubs/CityData');
+const Location = require('~/app/lib/models/Location');
+const LocationData = require('~/app/scripts/stubs/LocationData');
 const mongoose = require('mongoose');
 
-const DB_NAME = 'grimlock-city-living';
+const DB_NAME = 'grimlock-location-living';
 const exitStatus = {
   SUCCESS: 0,
   ERROR: 1,
@@ -39,25 +39,25 @@ const connect = () => {
 }
 
 const create = () => {
-  const cityDocuments = CityData.map(city => {
+  const locationDocuments = LocationData.map(location => {
     return new Promise((resolve, reject) => {
-      City.create(city, (err, cityDoc) => {
+      Location.create(location, (err, locationDoc) => {
         if (err) {
           return reject(err);
         }
         console.log(
-          chalk.yellow(` - created ${cityDoc.name}, ${cityDoc.state}`)
+          chalk.yellow(` - created ${locationDoc.name}, ${locationDoc.state}`)
         );
         resolve();
       })
     });
   });
-  return Promise.all(cityDocuments);
+  return Promise.all(locationDocuments);
 }
 
 const remove = () => {
   return new Promise((resolve, reject) => {
-    City.remove({}, err => {
+    Location.remove({}, err => {
       if (err) {
         return reject(err);
       }
