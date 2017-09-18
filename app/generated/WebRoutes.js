@@ -26,7 +26,7 @@ const routes: WebRouteListType = [
     fetchData: require('~/app/web/pages/LocationPage').genClientData,
     method: 'get',
     name: 'LocationRoute',
-    path: '/location/:state/:locationname',
+    path: '/location/:state/:city',
   },{
     Component: require('~/app/web/pages/SamplePage'),
     fetchData: fetcherMock,

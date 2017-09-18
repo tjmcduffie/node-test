@@ -6,7 +6,7 @@ const Location = require('~/app/lib/models/Location');
 const LocationData = require('~/app/scripts/stubs/LocationData');
 const mongoose = require('mongoose');
 
-const DB_NAME = 'grimlock-location-living';
+const DB_NAME = 'relocatr';
 const exitStatus = {
   SUCCESS: 0,
   ERROR: 1,
@@ -46,7 +46,7 @@ const create = () => {
           return reject(err);
         }
         console.log(
-          chalk.yellow(` - created ${locationDoc.name}, ${locationDoc.state}`)
+          chalk.yellow(` - created ${locationDoc.city}, ${locationDoc.state}`)
         );
         resolve();
       })

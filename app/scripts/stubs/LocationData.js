@@ -2,22 +2,22 @@
 
 const LocationData = [
   {
-    name: 'Boston',
+    city: 'Boston',
     state: 'MA',
     suggestedBy: 'Tim',
   },
   {
-    name: 'San Francisco',
+    city: 'San Francisco',
     state: 'CA',
     suggestedBy: 'Kristine',
   },
   {
-    name: 'Portland',
+    city: 'Portland',
     state: 'OR',
     suggestedBy: 'Tim',
   },
   {
-    name: 'Chicago',
+    city: 'Chicago',
     state: 'IL',
     suggestedBy: 'Kristine',
   },

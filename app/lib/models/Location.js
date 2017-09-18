@@ -7,7 +7,7 @@
 "use strict";
 
 export type LocationDataMutableFields = {
-  name: string,
+  city: string,
   state: string,
   suggestedBy: string,
 };
@@ -28,14 +28,13 @@ export type LocationsData = {
 const mongoose = require('mongoose');
 
 const LocationSchema = new mongoose.Schema({
-  locationState: {
+  cityState: {
     index: true,
     lowercase: true,
     unique: true,
     type: String,
   },
-  name: {
-    alias: 'location',
+  city: {
     required: true,
     type: String,
   },
@@ -50,55 +49,55 @@ const LocationSchema = new mongoose.Schema({
   },
 });
 
-function formatLocationState(location: string, state: string): string {
-  const formattedLocation = location.replace(' ', '-').toLowerCase();
+function formatCityState(city: string, state: string): string {
+  const formattedCity = city.replace(' ', '-').toLowerCase();
   const formattedState = state.replace(' ', '-').toLowerCase();
-  return `${formattedState}--${formattedLocation}`;
+  return `${formattedState}--${formattedCity}`;
 }
 
 LocationSchema.pre('save', function(next) {
-  this.locationState = formatLocationState(this.name, this.state);
+  this.cityState = formatCityState(this.city, this.state);
   next();
 });
 
-LocationSchema.statics.findOneByLocationAndState = function(
-  location: string,
+LocationSchema.statics.findOneByCityAndState = function(
+  city: string,
   state: string,
   fields: ?Object,
   options: ?Object,
   callback: (err: ?string, doc: ?Object) => void,
 ) {
   return this.findOne(
-    {locationState: formatLocationState(location, state)},
+    {cityState: formatCityState(city, state)},
     fields,
     options,
     callback,
   );
 }
 
-LocationSchema.statics.findOneByLocationAndStateAndUpdate = function(
-  location: string,
+LocationSchema.statics.findOneByCityAndStateAndUpdate = function(
+  city: string,
   state: string,
   updates: LocationDataMutableFields,
   options: ?Object,
   callback: (err: ?string, doc: ?Object) => void,
 ) {
   return this.findOneAndUpdate(
-    {locationState: formatLocationState(location, state)},
+    {cityState: formatCityState(city, state)},
     updates,
     options,
     callback,
   );
 }
 
-LocationSchema.statics.findOneByLocationAndStateAndRemove = function(
-  location: string,
+LocationSchema.statics.findOneByCityAndStateAndRemove = function(
+  city: string,
   state: string,
   options: ?Object,
   callback: (err: ?string, doc: ?Object) => void,
 ) {
   return this.findOneAndRemove(
-    {locationState: formatLocationState(location, state)},
+    {cityState: formatCityState(city, state)},
     options,
     callback,
   );

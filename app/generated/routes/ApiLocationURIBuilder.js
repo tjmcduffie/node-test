@@ -8,7 +8,7 @@ const URIBuilder = require('~/app/lib/util/URIBuilder.js');
 
 const ApiLocationURIBuilder = {
   getURIBuilder: () => {
-    return new URIBuilder('/api/location/:state/:locationname');
+    return new URIBuilder('/api/location/:state/:city');
   },
 };
 

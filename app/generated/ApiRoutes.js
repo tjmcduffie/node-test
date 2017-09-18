@@ -12,7 +12,7 @@ const routes: ApiRouteListType = [
   {
     methods: ['GET'],                   // this is squirrely right now...
     name: 'LocationRoute',                  // class ((LocationsRoute)) extends BaseHtmlRoute {
-    path: '/api/location/:state/:locationname', // const LocationsRoutePath: string = (('/locations/:page?'));
+    path: '/api/location/:state/:city', // const LocationsRoutePath: string = (('/locations/:page?'));
   },{
     methods: ['GET'],
     name: 'LocationsRoute',

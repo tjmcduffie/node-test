@@ -10,7 +10,7 @@ import type {LocationData} from '~/app/lib/models/Location';
 import type {Element as ReactElement} from 'react';
 
 export type LocationRouteParamsType = {
-  locationname: string,
+  city: string,
   state: string,
 };
 
@@ -27,7 +27,7 @@ const LocationPage = (props: LocationData): ReactElement<*> => {
       <Block theme={Block.theme.GRID_LIGHT}>
         <p>Location Page</p>
         <ul>
-          <li>{location.name}, {location.state}</li>
+          <li>{location.city}, {location.state}</li>
           <li>suggested by {location.suggestedBy}</li>
         </ul>
       </Block>
@@ -39,12 +39,12 @@ LocationPage.genClientData = (
   params: LocationRouteParamsType
 ): Promise<LocationData> => {
   const {
-    locationname,
+    city,
     state,
   } = params;
   const locationApiRoute = ApiLocationURIBuilder
     .getURIBuilder()
-    .setParam('locationname', locationname)
+    .setParam('city', city)
     .setParam('state', state)
     .toString();
   return new Promise((resolve, reject) => {

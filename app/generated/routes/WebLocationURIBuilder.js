@@ -8,7 +8,7 @@ const URIBuilder = require('~/app/lib/util/URIBuilder.js');
 
 const WebLocationURIBuilder = {
   getURIBuilder: () => {
-    return new URIBuilder('/location/:state/:locationname');
+    return new URIBuilder('/location/:state/:city');
   },
 };
 

@@ -16,7 +16,7 @@ const Location = require('~/app/lib/models/Location');
 const LocationPage = require('~/app/web/pages/LocationPage');
 const React = require('react');
 
-const LocationRoutePath: string = '/location/:state/:locationname';
+const LocationRoutePath: string = '/location/:state/:city';
 
 class LocationRoute extends BaseHtmlRoute {
   static getPath(): string {
@@ -31,14 +31,14 @@ class LocationRoute extends BaseHtmlRoute {
 
   genData(): Promise<LocationData> {
     const {
-      locationname,
+      city,
       state,
     } = this._req.params;
     return new Promise((resolve, reject) => {
       const fields = null;
       const options = null;
-      Location.findOneByLocationAndState(
-        locationname,
+      Location.findOneByCityAndState(
+        city,
         state,
         fields,
         options,

@@ -16,8 +16,8 @@ export type LocationsRouteParamsType = {
 const ApiLocationsURIBuilder = require('~/app/generated/routes/ApiLocationsURIBuilder');
 const AsyncRequest = require('~/app/lib/util/AsyncRequest');
 const Block = require('~/app/web/components/global/Block');
-const NewLocationButton = require('~/app/web/components/location/NewLocationButton')
 const Link = require('~/app/web/components/global/Link');
+const NewLocationButton = require('~/app/web/components/location/NewLocationButton')
 const Page = require('~/app/web/components/global/Page');
 const React = require('react');
 const WebLocationURIBuilder = require('~/app/generated/routes/WebLocationURIBuilder');
@@ -34,12 +34,12 @@ const LocationsPage = (props: LocationsData): ReactNode => {
             const locationWebPath = WebLocationURIBuilder
               .getURIBuilder()
               .setParam('state', location.state)
-              .setParam('locationname', location.name)
+              .setParam('city', location.city)
               .toString()
             return (
               <li key={location._id}>
                 <Link href={locationWebPath}>
-                  <b>{location.name}, {location.state}</b>
+                  <b>{location.city}, {location.state}</b>
                 </Link> suggested by {location.suggestedBy}
               </li>
             );

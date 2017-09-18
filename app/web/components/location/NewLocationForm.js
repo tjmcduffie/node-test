@@ -24,7 +24,7 @@ type Props = {
 };
 
 type LocationDataInputs = {
-  location: FieldType,
+  city: FieldType,
   state: FieldType,
   suggestedBy: FieldType,
 }
@@ -61,7 +61,7 @@ class NewLocationForm extends React.Component<Props, State> {
     super(props);
     this.state = {
       isLoading: false,
-      location: {
+      city: {
         error: null,
         value: '',
       },
@@ -76,21 +76,22 @@ class NewLocationForm extends React.Component<Props, State> {
     };
   }
 
-  _convertFieldsToMutableData(input: LocationDataInputs): LocationDataMutableFields {
+  _convertFieldsToMutableData(
+    input: LocationDataInputs
+  ): LocationDataMutableFields {
     let hasErrors = false;
     const output = {};
     const updatedInputs = {};
     Object
       .keys(input)
-      .filter(key => ['location', 'state', 'suggestedBy'].includes(key))
+      .filter(key => ['city', 'state', 'suggestedBy'].includes(key))
       .forEach(key => {
         if (this._isEmptyString(input[key].value)) {
           hasErrors = true;
           updatedInputs[key] = input[key];
           updatedInputs[key].error = `${key} is required`;
         } else {
-          const outputKey = key !== 'location' ? key : 'locationname';
-          output[outputKey] = input[key].value;
+          output[key] = input[key].value;
         }
       });
 
@@ -111,7 +112,7 @@ class NewLocationForm extends React.Component<Props, State> {
       // bit it *should* be handled well but its better to introduce redux
       const locationApiRoute = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', data.locationname)
+        .setParam('city', data.city)
         .setParam('state', data.state)
         .toString()
       new AsyncRequest(locationApiRoute)
@@ -148,7 +149,7 @@ class NewLocationForm extends React.Component<Props, State> {
 
   render(): ReactNode {
     const {
-      location,
+      city,
       state,
       suggestedBy,
     } = this.state;
@@ -161,19 +162,19 @@ class NewLocationForm extends React.Component<Props, State> {
           <span>City/Metro area</span>
           <input
             className={cx(style.input)}
-            name="location"
+            name="city"
             onChange={this._handleInputChange}
             required={true}
             type="text"
-            value={location.value}
+            value={city.value}
           />
           <span
             className={cx({
               [style.error]: true,
-              [globalstyle.hidden]: !location.error,
+              [globalstyle.hidden]: !city.error,
             })}
           >
-            {location.error}
+            {city.error}
           </span>
         </label>
         <label className={cx(style.label)}>

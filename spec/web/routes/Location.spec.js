@@ -7,7 +7,7 @@ const LocationRoute = require('~/app/web/routes/LocationRoute')
 const PORT = 3001;
 const PATH = LocationRoute.getPath()
   .replace(':state','ma')
-  .replace(':locationname','boston');
+  .replace(':city','boston');
 const uri = `http://localhost:${PORT}${PATH}`;
 
 describe('The Location page', () => {

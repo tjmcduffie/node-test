@@ -6,11 +6,11 @@ const request = require('superagent');
 const PORT = 3001;
 const uriPrefix = `http://localhost:${PORT}`;
 const ApiLocationURIBuilder = require('~/app/generated/routes/ApiLocationURIBuilder');
-const location = 'testville';
+const city = 'testville';
 const state = 'testachusetts'
-const locationState = `${state}--${location}`;
+const cityState = `${state}--${city}`;
 
-describe('SampleRoute', () => {
+describe('LocationRoute', () => {
   let app
 
   afterEach(() => {
@@ -25,21 +25,21 @@ describe('SampleRoute', () => {
     it('should handle success', done => {
       const uri = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', 'testville')
+        .setParam('city', 'testville')
         .setParam('state', 'testachusetts')
         .toString();
       request
         .post(uriPrefix + uri)
         .send({
-          locationname: 'testville',
+          city: 'testville',
           state: 'testachusetts',
           suggestedBy: 'Tim',
         })
         .end(function(err, res) {
           expect(err).toBeNull();
           expect(res.status).toBe(200);
-          expect(res.body.data.location.locationState).toBe(locationState);
-          expect(res.body.data.location.name).toBe(location);
+          expect(res.body.data.location.cityState).toBe(cityState);
+          expect(res.body.data.location.city).toBe(city);
           expect(res.body.data.location.state).toBe(state);
           expect(res.body.data.location.suggestedBy).toBe('Tim');
           done();
@@ -48,13 +48,13 @@ describe('SampleRoute', () => {
     it('should handle 500 errors', done => {
       const uri = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', 'testville')
+        .setParam('city', 'testville')
         .setParam('state', 'testachusetts')
         .toString();
       request
         .post(uriPrefix + uri)
         .send({
-          locationname: 'testville',
+          city: 'testville',
           state: 'testachusetts',
           suggestedBy: 'Tim',
         })
@@ -73,7 +73,7 @@ describe('SampleRoute', () => {
     it('should handle success', done => {
       const uri = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', 'testville')
+        .setParam('city', 'testville')
         .setParam('state', 'testachusetts')
         .toString();
       request
@@ -81,8 +81,8 @@ describe('SampleRoute', () => {
         .end(function(err, res) {
           expect(err).toBeNull();
           expect(res.status).toBe(200);
-          expect(res.body.data.location.locationState).toBe(locationState);
-          expect(res.body.data.location.name).toBe(location);
+          expect(res.body.data.location.cityState).toBe(cityState);
+          expect(res.body.data.location.city).toBe(city);
           expect(res.body.data.location.state).toBe(state);
           expect(res.body.data.location.suggestedBy).toBe('Tim');
           done();
@@ -91,7 +91,7 @@ describe('SampleRoute', () => {
     it('should handle 404 errors', done => {
       const uri = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', 'foo')
+        .setParam('city', 'foo')
         .setParam('state', 'bar')
         .toString();
       request
@@ -111,7 +111,7 @@ describe('SampleRoute', () => {
     it('should handle success', done => {
       const uri = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', 'testville')
+        .setParam('city', 'testville')
         .setParam('state', 'testachusetts')
         .toString();
       request
@@ -120,8 +120,8 @@ describe('SampleRoute', () => {
         .end(function(err, res) {
           expect(err).toBeNull();
           expect(res.status).toBe(200);
-          expect(res.body.data.location.locationState).toBe(locationState);
-          expect(res.body.data.location.name).toBe(location);
+          expect(res.body.data.location.cityState).toBe(cityState);
+          expect(res.body.data.location.city).toBe(city);
           expect(res.body.data.location.state).toBe(state);
           expect(res.body.data.location.suggestedBy).toBe('Kristine');
           done();
@@ -130,7 +130,7 @@ describe('SampleRoute', () => {
     it('should handle 404 errors', done => {
       const uri = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', 'foo')
+        .setParam('city', 'foo')
         .setParam('state', 'bar')
         .toString();
       request
@@ -151,7 +151,7 @@ describe('SampleRoute', () => {
     it('should handle success', done => {
       const uri = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', 'testville')
+        .setParam('city', 'testville')
         .setParam('state', 'testachusetts')
         .toString();
       request
@@ -159,8 +159,8 @@ describe('SampleRoute', () => {
         .end(function(err, res) {
           expect(err).toBeNull();
           expect(res.status).toBe(200);
-          expect(res.body.data.location.locationState).toBe(locationState);
-          expect(res.body.data.location.name).toBe(location);
+          expect(res.body.data.location.cityState).toBe(cityState);
+          expect(res.body.data.location.city).toBe(city);
           expect(res.body.data.location.state).toBe(state);
           done();
         });
@@ -168,7 +168,7 @@ describe('SampleRoute', () => {
     it('should handle 404 errors', done => {
       const uri = ApiLocationURIBuilder
         .getURIBuilder()
-        .setParam('locationname', 'testville')
+        .setParam('city', 'testville')
         .setParam('state', 'testachusetts')
         .toString();
       request

@@ -17,7 +17,7 @@ const BaseJsonApiRoute = require('~/app/api/routes/BaseJsonApiRoute');
 const Location = require('~/app/lib/models/Location');
 const {NotFoundError, SystemError} = require('~/app/lib/ServerErrors');
 
-const LocationsRoutePath: string = '/api/location/:state/:locationname';
+const LocationsRoutePath: string = '/api/location/:state/:city';
 
 
 class LocationsRoute extends BaseJsonApiRoute {
@@ -37,13 +37,13 @@ class LocationsRoute extends BaseJsonApiRoute {
 
   delete_v1_0_0() {
     const {
-      locationname,
+      city,
       state,
     } = this._req.params;
     this._genResponse(() =>
       new Promise((resolve, reject) => {
-        Location.findOneByLocationAndStateAndRemove(
-          locationname,
+        Location.findOneByCityAndStateAndRemove(
+          city,
           state,
           null, // options
           (err, location) => {
@@ -64,13 +64,13 @@ class LocationsRoute extends BaseJsonApiRoute {
 
   get_v1_0_0() {
     const {
-      locationname,
+      city,
       state,
     } = this._req.params;
     this._genResponse(() =>
       new Promise((resolve, reject) => {
-        Location.findOneByLocationAndState(
-          locationname,
+        Location.findOneByCityAndState(
+          city,
           state,
           null, // fields
           null, // options
@@ -92,7 +92,7 @@ class LocationsRoute extends BaseJsonApiRoute {
 
   post_v1_0_0() {
     const {
-      locationname: name,
+      city,
       state,
       suggestedBy,
     } = this._req.body;
@@ -100,7 +100,7 @@ class LocationsRoute extends BaseJsonApiRoute {
       new Promise((resolve, reject) => {
         Location.create(
           {
-            name,
+            city,
             state,
             suggestedBy,
           },
@@ -117,18 +117,17 @@ class LocationsRoute extends BaseJsonApiRoute {
 
   put_v1_0_0() {
     const {
-      locationname: old_locationname,
+      city: old_city,
       state: old_state,
     } = this._req.params;
-
     const {
-      name: new_name,
+      city: new_city,
       state: new_state,
       suggestedBy: new_suggestedBy,
     } = this._req.body;
     const updates = {};
-    if (new_name) {
-      updates.name = new_name;
+    if (new_city) {
+      updates.city = new_city;
     }
     if (new_state) {
       updates.state = new_state;
@@ -139,8 +138,8 @@ class LocationsRoute extends BaseJsonApiRoute {
 
     this._genResponse(() =>
       new Promise((resolve, reject) => {
-        Location.findOneByLocationAndStateAndUpdate(
-          old_locationname,
+        Location.findOneByCityAndStateAndUpdate(
+          old_city,
           old_state,
           updates,
           {new: true},
