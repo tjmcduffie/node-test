@@ -37,11 +37,7 @@ mongoose.connection.on('disconnected', function () {
 });
 
 const exit = (): void => {
-  mongoose.connection.close(function () {
-    console.log(`Mongoose default connection with DB :${DB_NAME} is disconnected
-      through app termination`);
-    process.exit(0);
-  });
+  mongoose.connection.close();
 }
 
 process
