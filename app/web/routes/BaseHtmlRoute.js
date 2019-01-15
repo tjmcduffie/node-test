@@ -98,6 +98,9 @@ class BaseHtmlRoute {
             initialData: JSON.stringify({
               [this.getPageComponent().name]: pageData,
             }, null, 2),
+            preloadData: {
+              [this.getPageComponent().name]: pageData,
+            },
           },
         );
     } catch (e) {

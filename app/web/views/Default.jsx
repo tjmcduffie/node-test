@@ -14,8 +14,12 @@ module.exports = function Default(props: {
   children?: Array<ReactElement<*>> | ReactElement<*>,
   title: string,
   initialData: string,
+  preloadData: Object,
 }): ReactElement<*> {
   const initialdataJSON = `window.__initialData__ = ${props.initialData}`;
+  const preloadedDataJSON =
+    JSON.stringify(props.preloadData, null, 2).replace(/</g, '\\u003c');
+  const preloadedDataString = `window.__preloadedData__ = ${preloadedDataJSON}`;
   return (
     <html>
       <head>
@@ -34,6 +38,7 @@ module.exports = function Default(props: {
       <body>
         {props.children}
         <script dangerouslySetInnerHTML={{__html: initialdataJSON}} />
+        <script dangerouslySetInnerHTML={{__html: preloadedDataString}} />
         <script src="/js/inline.bundle.js"></script>
         <script src="/js/header.bundle.js"></script>
         <script src="/js/content.bundle.js"></script>
