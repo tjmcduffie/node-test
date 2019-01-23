@@ -1,0 +1,22 @@
+{
+  "ignore": [
+    ".git",
+    ".nyc_output",
+    "node_modules",
+    "app/log",
+    "app/scripts",
+    "build/log",
+    "db",
+    "flow-typed",
+    "spec",
+    ".eslintignore",
+    ".eslintrc",
+    ".flowconfig",
+    ".gitignore",
+    ".notes",
+    ".nycrc",
+    "jasmine.json",
+    "package.json",
+    "*.md"
+  ]
+}

@@ -17,7 +17,7 @@ module.exports = function runWhenReady(callback?: () => void) {
 
   if (
     document.readyState === "complete" ||
-    (document.readyState !== "loading" && document.documentElement && !document.documentElement.doScroll)
+    (document.readyState !== "loading" && document?.documentElement?.doScroll)
   ) {
     callback();
   } else {

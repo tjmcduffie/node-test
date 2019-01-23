@@ -8,9 +8,10 @@ lib-cov
 *.gz
 *.lock
 
-reports
+db
 logs
 .nyc_output
+reports
 
 npm-debug.log
 node_modules

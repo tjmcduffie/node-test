@@ -1,21 +1,22 @@
 {
   "presets": [
-    "flow",
-    "react",
+    "@babel/preset-flow",
+    "@babel/preset-react",
   ],
 
   "plugins": [
-    ["transform-async-to-generator"],
-    ["transform-class-properties", {}],
-    ["transform-object-rest-spread"],
-    ["transform-strict-mode", { "strict": true }],
+    ["@babel/plugin-proposal-class-properties", {}],
+    ["@babel/plugin-proposal-object-rest-spread"],
+    ["@babel/plugin-proposal-optional-chaining"],
+    ["@babel/plugin-transform-async-to-generator"],
+    ["@babel/plugin-transform-strict-mode", { "strict": true }],
   ],
 
   "env": {
     "test": {
       "presets": [
-        "flow",
-        "react",
+        "@babel/preset-flow",
+        "@babel/preset-react",
       ],
       "plugins": ["istanbul"]
     },

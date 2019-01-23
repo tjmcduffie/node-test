@@ -12,11 +12,13 @@ const mongoose = require('mongoose');
 const DB_NAME = 'relocatr';
 const ENV = process.env.NODE_ENV;
 
+mongoose.Promise = global.Promise;
+
 const connect = (): Promise<*> => {
   return new Promise((resolve, reject) => {
     mongoose
       .connect(`mongodb://localhost/${DB_NAME}`, {
-        useMongoClient: true,
+        useNewUrlParser: true,
         config: {
           autoIndex: ENV !== EnvEnum.DEV ? false : true,
         },

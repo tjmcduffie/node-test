@@ -21,7 +21,7 @@ const flags = args.parse(process.argv);
 
 const connect = () => {
   return new Promise((resolve, reject) => {
-    mongoose.connect(`mongodb://localhost/${DB_NAME}`, {useMongoClient: true});
+    mongoose.connect(`mongodb://localhost/${DB_NAME}`, {useNewUrlParser: true});
 
     mongoose.connection.on('error', function(err) {
       console.error(
