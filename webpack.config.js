@@ -14,30 +14,32 @@ module.exports = {
   },
   output: {
     path: path.join(__dirname, 'build', 'static'),
-    filename: 'js/[name].bundle.js',
+    filename: 'js/[name].[chunkhash].bundle.js', // maybe chunkFilename
+    publicPath: '/',
+    library: 'Grimlock',
   },
   module: {
     rules: [
       {
         test: /\.js$/,
-        exclude: /(node_modules)/,
+        exclude: path.resolve(__dirname, 'node_modules'),
         use: {
           loader: 'babel-loader',
-          options: {
-            babelrc: false,
-            cacheDirectory: true,
-            presets: [
-              '@babel/preset-react',
-              '@babel/preset-flow',
-            ],
-            plugins: [
-              ["@babel/plugin-proposal-class-properties", {}],
-              ["@babel/plugin-proposal-object-rest-spread"],
-              ["@babel/plugin-proposal-optional-chaining"],
-              ["@babel/plugin-transform-async-to-generator"],
-              ["@babel/plugin-transform-strict-mode", { "strict": true }],
-            ],
-          },
+          // options: {
+          //   babelrc: false,
+          //   cacheDirectory: true,
+          //   presets: [
+          //     '@babel/preset-react',
+          //     '@babel/preset-flow',
+          //   ],
+          //   plugins: [
+          //     ["@babel/plugin-proposal-class-properties", {}],
+          //     ["@babel/plugin-proposal-object-rest-spread"],
+          //     ["@babel/plugin-proposal-optional-chaining"],
+          //     ["@babel/plugin-transform-async-to-generator"],
+          //     ["@babel/plugin-transform-strict-mode", { "strict": true }],
+          //   ],
+          // },
         },
       },
       {
@@ -57,26 +59,26 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-      },
-    }),
-    new UglifyJsPlugin({
-      // beautify: true,
-      // compress: false,
-      // mangle: false,
-      // sourcemap: true,
-      beautify: process.env.NODE_ENV !== EnvEnum.DEV ? false: true,
-      compress: process.env.NODE_ENV !== EnvEnum.DEV ? true: false,
-      mangle: process.env.NODE_ENV !== EnvEnum.DEV ? true: false,
-      sourcemap: process.env.NODE_ENV !== EnvEnum.DEV ? false: true,
-    }),
-    new webpack.optimize.CommonsChunkPlugin({
-      name: 'inline',
-      filename: 'js/inline.bundle.js',
-      minChunks: 2,
-    }),
+    // new webpack.DefinePlugin({
+    //   'process.env': {
+    //     NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+    //   },
+    // }),
+    // new UglifyJsPlugin({
+    //   // beautify: true,
+    //   // compress: false,
+    //   // mangle: false,
+    //   // sourcemap: true,
+    //   beautify: process.env.NODE_ENV !== EnvEnum.DEV ? false: true,
+    //   compress: process.env.NODE_ENV !== EnvEnum.DEV ? true: false,
+    //   mangle: process.env.NODE_ENV !== EnvEnum.DEV ? true: false,
+    //   sourcemap: process.env.NODE_ENV !== EnvEnum.DEV ? false: true,
+    // }),
+    // new webpack.optimize.CommonsChunkPlugin({
+    //   name: 'inline',
+    //   filename: 'js/inline.bundle.js',
+    //   minChunks: 2,
+    // }),
     new ExtractTextPlugin({
       filename: 'css/[name].bundle.css',
     }),
