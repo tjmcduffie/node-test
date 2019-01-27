@@ -9,6 +9,18 @@
 import type {Element as ReactElement} from 'react';
 
 const React = require('react');
+const assetManifest = require('~/generated/asset-manifest.json');
+
+const styles = [];
+const scripts = [];
+
+Object.values(assetManifest).forEach((asset: string) => {
+  if (asset.substring(0, 3) === 'css') {
+    styles.push(asset);
+  } else if (asset.substring(0, 2) === 'js') {
+    scripts.push(asset);
+  }
+});
 
 module.exports = function Default(props: {
   children?: Array<ReactElement<*>> | ReactElement<*>,
@@ -31,17 +43,13 @@ module.exports = function Default(props: {
         <title>
           {props.title}
         </title>
-        <link href="/css/inline.bundle.css" rel="stylesheet" />
-        <link href="/css/header.bundle.css" rel="stylesheet" />
-        <link href="/css/content.bundle.css" rel="stylesheet" />
+        {styles.map(path => (<link href={`/${path}`} key={path} rel="stylesheet" />))}
       </head>
       <body>
         {props.children}
         <script dangerouslySetInnerHTML={{__html: initialdataJSON}} />
         <script dangerouslySetInnerHTML={{__html: preloadedDataString}} />
-        <script src="/js/inline.bundle.js"></script>
-        <script src="/js/header.bundle.js"></script>
-        <script src="/js/content.bundle.js"></script>
+        {scripts.map(path => (<script key={path} src={`/${path}`}></script>))}
       </body>
     </html>
   );

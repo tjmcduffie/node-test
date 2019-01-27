@@ -9,6 +9,8 @@
     "db",
     "flow-typed",
     "spec",
+    "generated/asset-manifest.json",
+    "app/static_src/css/*.css.json",
     ".eslintignore",
     ".eslintrc",
     ".flowconfig",

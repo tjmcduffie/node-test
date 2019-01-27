@@ -74,7 +74,7 @@ app.use(bodyParser.urlencoded({
 // HELMET FOR SECURITY
 
 // view engines
-const viewExtension = 'jsx';
+const viewExtension = ENV !== EnvEnum.DEV ? 'js' : 'jsx';
 app.set('views', __dirname + '/web/views');
 app.set('view engine', viewExtension);
 app.engine(viewExtension, createReactViewsEngine({
@@ -90,12 +90,13 @@ if (ENV === EnvEnum.DEV) {
   console.log('serving js from Webpack middleware');
   const webpack = require('webpack');
   const webpackDevMiddleware = require('webpack-dev-middleware');
-  const webpackConfig = require('~/webpack.config');
+  const webpackConfig = require('~/webpack.config')(ENV, {mode: 'development'});
+  webpackConfig.mode = 'development';
   app.use(webpackDevMiddleware(webpack(webpackConfig), {
-    publicPath: '/',
+    publicPath: webpackConfig.output.publicPath,
   }));
 
-  app.use('/img', express.static(__dirname + '/../build/static/img'));
+  app.use('/img', express.static(__dirname + '/../app/static_src/img'));
 } else {
   app.use(express.static(__dirname + '/../static'));
 }
