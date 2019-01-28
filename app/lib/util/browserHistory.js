@@ -1,6 +1,6 @@
 /*global */
 /**
- * 
+ *
  * @flow
  */
 
@@ -20,6 +20,7 @@ let browserHistory = undefined;
 
 module.exports = (): ?BrowserHistory => {
   if (browserHistory === undefined && typeof document !== 'undefined') {
+    console.log('creating history');
     browserHistory = createBrowserHistory();
   }
   return browserHistory;

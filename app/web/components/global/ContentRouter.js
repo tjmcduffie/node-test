@@ -58,14 +58,11 @@ class ContentRouter extends React.Component<{}, State> {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this._history) {
       this._unlistenToHistory = this._history.listen(this._handleHistoryChange);
+      this._resolve(this._history.location, true);
     }
-  }
-
-  componentDidMount() {
-    this._resolve(this._history.location, true);
   }
 
   componentWillUnount() {
@@ -73,6 +70,7 @@ class ContentRouter extends React.Component<{}, State> {
   }
 
   _handleHistoryChange = (uri: Location): void => {
+    console.log('handling history change');
     this.setState({isLoading: true});
     this._resolve(uri);
   };
