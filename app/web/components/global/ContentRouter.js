@@ -26,10 +26,12 @@ type State = {
 };
 
 const BaseError = require('~/app/lib/BaseError');
-const browserHistory = require('~/app/lib/util/browserHistory')();
+const browserHistory = require('~/app/lib/util/browserHistory');
 const DataCache = require('~/app/lib/util/DataCache');
 const ErrorNotFoundPage = require('~/app/web/pages/ErrorNotFoundPage');
 const Error500Page = require('~/app/web/pages/Error500Page');
+const Footer = require('~/app/web/components/layout/Footer');
+const Header = require('~/app/web/components/layout/Header');
 const LoadingScreen = require('~/app/web/components/global/LoadingScreen');
 const React = require('react');
 const router = require('~/app/web/routes/Router');
@@ -58,14 +60,11 @@ class ContentRouter extends React.Component<{}, State> {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if (this._history) {
       this._unlistenToHistory = this._history.listen(this._handleHistoryChange);
+      this._resolve(this._history.location, true);
     }
-  }
-
-  componentDidMount() {
-    this._resolve(this._history.location, true);
   }
 
   componentWillUnount() {
@@ -139,10 +138,12 @@ class ContentRouter extends React.Component<{}, State> {
       page,
     } = this.state;
     return (
-      <div>
+      <>
+        <Header />
         {page}
         <LoadingScreen isVisible={isLoading} />
-      </div>
+        <Footer />
+      </>
     );
   }
 }

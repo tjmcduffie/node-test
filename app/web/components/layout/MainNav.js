@@ -32,6 +32,10 @@ const navLinks: Array<NavLink> = [
     name: 'Locations',
     path: router.makePath('LocationsRoute', {page: 0}),
   },
+  {
+    name: 'Null',
+    path: '/foobar',
+  },
 ];
 
 class MainNav extends React.PureComponent<Props> {
