@@ -14,14 +14,6 @@ export type BrowserHistory = {
   listen: Function,
   location: Location,
   push: Function,
-}
+} 
 
-let browserHistory = undefined;
-
-module.exports = (): ?BrowserHistory => {
-  if (browserHistory === undefined && typeof document !== 'undefined') {
-    console.log('creating history');
-    browserHistory = createBrowserHistory();
-  }
-  return browserHistory;
-}
+module.exports = typeof document !== 'undefined' ? createBrowserHistory() : undefined;

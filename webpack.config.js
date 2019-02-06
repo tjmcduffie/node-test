@@ -15,7 +15,6 @@ module.exports = function(env, argv) {
 
   return {
     entry: {
-      header: path.join(__dirname, 'app', 'static_src', 'js', 'AppHeader.js'),
       content: path.join(__dirname, 'app', 'static_src', 'js', 'AppContent.js'),
     },
     output: {

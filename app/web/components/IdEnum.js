@@ -8,6 +8,4 @@
 
 module.exports = {
   CONTENT: 'content',
-  FOOTER: 'footer',
-  HEADER: 'header',
 };

@@ -78,7 +78,7 @@ const viewExtension = ENV !== EnvEnum.DEV ? 'js' : 'jsx';
 app.set('views', __dirname + '/web/views');
 app.set('view engine', viewExtension);
 app.engine(viewExtension, createReactViewsEngine({
-  beautify: false,
+  beautify: ENV !== EnvEnum.DEV ? false : true,
   transformViews: true,
 }));
 

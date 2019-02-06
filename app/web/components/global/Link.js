@@ -18,7 +18,7 @@ type Props = {
 };
 
 const BaseError = require('~/app/lib/BaseError');
-const browserHistory = require('~/app/lib/util/browserHistory')();
+const browserHistory = require('~/app/lib/util/browserHistory');
 const React = require('react');
 const URIParser = require('~/app/lib/util/URIParser');
 
@@ -40,11 +40,12 @@ class Link extends React.PureComponent<Props> {
     }
 
     e.preventDefault();
+    this.props.onClick && this.props.onClick();
+
     if (typeof e.currentTarget.href !== 'string') {
-      throw new LinkError('Link doesn\'t have an href to parse');
+      return;
     }
     const parsedURI = new URIParser(e.currentTarget.href);
-    // flow complains without this additional check. lame.
     this._history && this._history.push({
       pathname: parsedURI.getPathname(),
       search: parsedURI.getSearch(),
@@ -56,7 +57,7 @@ class Link extends React.PureComponent<Props> {
       <a
         className={this.props.className}
         href={this.props.href}
-        onClick={this.props.onClick || this._handleClick}
+        onClick={this._handleClick}
       >
         {this.props.children}
       </a>
